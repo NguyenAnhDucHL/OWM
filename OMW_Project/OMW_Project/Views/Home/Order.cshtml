@@ -1,0 +1,75 @@
+﻿@model OrdersViewModel
+@{
+    ViewBag.Title = "Order";
+}
+<style>
+	.row {
+		margin: 20px auto
+	}
+</style>
+
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+                    
+                    <!-- Main -->
+                    <div class="container">
+                        <div class="row">
+                            <table class="show-cart table">
+                            </table>
+                            <div>Total price: <span class="total-cart"></span></div>
+                        </div>
+                        <h2>Thông tin giao hàng</h2>
+
+                        <div class="row">
+                            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 float-right">
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 float-right">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 float-right">
+                                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 float-right">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <button id="btnSaveOrder" style="margin:0 auto" class="btn btn-danger">Đặt Hàng</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section   scripts {
+    <script src="~/Assets/vendor/bootstrap/js/business-casual.js"></script>
+    <script src="~/Assets/js/Order.js"></script>
+}

@@ -1,0 +1,47 @@
+﻿@model IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 mx-auto">
+                    <div class="cta-inner rounded">
+                        <div class="container">
+                            <div class="row">
+
+                                <p class="text-success">@ViewBag.StatusMessage</p>
+
+                                @*<div class="col-md-8">
+                                    <p>
+                                        @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
+                                            : Html.ActionLink("Pick a password", "SetPassword"))
+                                    </p>
+                                    <p>
+                                        Phone Number: @(Model.PhoneNumber ?? "None") [
+                                        @if (Model.PhoneNumber != null)
+                                        {
+                                            @Html.ActionLink("Change", "AddPhoneNumber")
+                                            @: &nbsp;|&nbsp;
+                                            @Html.ActionLink("Remove", "RemovePhoneNumber")
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Add", "AddPhoneNumber")
+                                        }
+                                        ]
+                                    </p>
+                                    <p>
+                                        External Logins: @Model.Logins.Count
+                                        @Html.ActionLink("[Manage]", "ManageLogins")
+                                    </p>
+
+                                </div>*@
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

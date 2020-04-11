@@ -1,0 +1,49 @@
+﻿@using OMW_Project.SupportClass
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="index.html">Đông Phương Y Học</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+		        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav mx-auto">
+				<li class="nav-item px-lg-4 @Url.IsActive("Index", "Home")">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "Home", new { area = "" })">
+						Trang Chủ
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item px-lg-4 @Url.IsActive("About", "Home")">
+					<a class="nav-link text-uppercase text-expanded" href="#">Giới Thiệu</a>
+					<ul class="sub-menu">
+						<li><a class="nav-link text-uppercase text-expanded" style="color: rgba(255, 255, 255, 0.85)" href="@Url.Action("About", "Home", new { area = "" })">Về chúng tôi</a></li>
+						<li><a class="nav-link text-uppercase text-expanded" style="color: rgba(255, 255, 255, 0.85)" href="">Về đội ngũ Bác sĩ</a></li>
+					</ul>
+				</li>
+				<li class="nav-item px-lg-4 @Url.IsActive("Store", "Home")">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Store", "Home", new { area = "" })">Sản Phẩm</a>
+				</li>
+				<li class="nav-item px-lg-4 @Url.IsActive("CategoryDetail", "Home")">
+					<a class="nav-link text-uppercase text-expanded" href="#">Bài Viết</a>
+					<ul class="sub-menu">
+						@foreach (var item in ViewBag.lstCatePost)
+						{
+							<li><a class="nav-link text-uppercase text-expanded" style="color: rgba(255, 255, 255, 0.85)" href="@Url.Action("CategoryDetail", "Home", new { @id = item.CategoryPostId })">@item.CategoryName</a></li>
+						}
+					</ul>
+				</li>
+				<li class="nav-item px-lg-4 @Url.IsActive("Book", "Consulting")">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Book","Consulting")">Đặt lịch bác sĩ</a>
+				</li>
+				@if (Request.IsAuthenticated && !User.IsInRole("User"))
+				{
+					<li class="nav-item px-lg-4  @Url.IsActive("Index", "UsersAdmin") ">
+						<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">CMS</a>
+					</li>
+				}
+
+			</ul>
+		</div>
+	</div>
+</nav>

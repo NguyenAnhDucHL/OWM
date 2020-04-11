@@ -1,0 +1,106 @@
+﻿@model LoginViewModel
+
+@{
+	ViewBag.Title = "Log in";
+}
+@section NavBar{
+	<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+		<div style="width:100%">
+			<div class="col">
+
+				@Html.Partial("_PatialRegisterButton")
+			</div>
+		</div>
+	</nav>
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="../Shared/index.html">Đông Phương Y Học</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav mx-auto">
+				<li class="nav-item px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "Home", new { area = "" })">
+						Trang Chủ
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item  px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("About", "Home", new { area = "" })">Giới Thiệu</a>
+				</li>
+				<li class="nav-item px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Store", "Home", new { area = "" })">Sản Phẩm</a>
+				</li>
+				<li class="nav-item px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Book","Consulting")">Đặt lịch bác sĩ</a>
+				</li>
+				@if (Request.IsAuthenticated && !User.IsInRole("User"))
+				{
+					<li class="nav-item px-lg-4">
+						<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">CMS</a>
+					</li>
+				}
+
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<h2>@ViewBag.Title.</h2>
+<section class="page-section cta">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 cta-inner rounded">
+				<section id="loginForm">
+					@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+					{
+						@Html.AntiForgeryToken()
+						<h4>Đăng nhập</h4>
+						<hr />
+						@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+						<div class="form-group">
+							@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+							<div class="col-md-10">
+								@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+								@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+							<div class="col-md-10">
+								@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+								@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-10">
+								<div class="checkbox">
+									@Html.CheckBoxFor(m => m.RememberMe)
+									@Html.LabelFor(m => m.RememberMe)
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-10">
+								<input type="submit" value="Log in" class="btn btn-info" />
+							</div>
+						</div>
+
+					}
+
+				</section>
+			</div>
+			
+		</div>
+	</div>
+</section>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

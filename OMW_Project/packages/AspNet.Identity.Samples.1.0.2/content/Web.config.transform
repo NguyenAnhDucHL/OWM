@@ -1,0 +1,8 @@
+<configuration>
+  <connectionStrings>
+    <add name="AspNetIdentityConnection" connectionString="Server=.;Database=AspNetIdentityDb;User Id=sa;Password=Abcd@1234" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <add key="owin:AppStartup" value="$rootnamespace$.Startup,$rootnamespace$"/>
+  </appSettings>
+</configuration>

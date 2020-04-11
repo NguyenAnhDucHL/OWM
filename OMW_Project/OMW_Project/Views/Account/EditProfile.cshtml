@@ -1,0 +1,124 @@
+﻿@model User
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<style>
+    .row {
+        margin: 20px 0;
+    }
+</style>
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner text-center rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+                        @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img id="imgPreview" class="border-dark" src="@(Model.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="200" height="300" style="margin:0 auto;border:1px solid black" />
+                                </div>
+                            </div>
+                            <div class="form-group row d-none">
+                                <label class="control-label col-md-3">Image</label>
+                                <div class="col-md-3">
+                                    <input type="file" name="myfile" id="myfile" onchange="previewImg(event)">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9 float-right">
+                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9 float-right">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9 float-right">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.Sex, new { @class = "col-md-3 control-label" })
+                                <div class="col-md-9">
+                                    <input type="radio" name="Sex" value="true" class="checkbox-inline" @(Model.Sex ? "checked" : "") />
+                                    @Html.Label("Male", new { @class = "control-label" })
+                                    <input type="radio" name="Sex" value="false" class="checkbox-inline" @(!Model.Sex ? "checked" : "") />
+                                    @Html.Label("Female", new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9 float-right">
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#imgPreview").click(function (e) {
+            e.preventDefault();
+            $("#myfile").click();
+        });
+        $("input[type='radio']").change(function (e) {
+            e.preventDefault();
+            if ($("input[type='radio'][value='Doctor']").is(':checked')) {
+                $("#more").removeClass("hide");
+            } else {
+                $("#more").addClass("hide");
+            }
+
+        });
+        var previewImg = function () {
+            var file = event.target.files[0];
+            const name = file.name;
+            const lastDot = name.lastIndexOf('.');
+            const ext = name.substring(lastDot + 1);
+            if (ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'JPG' || ext === 'JPEG' || ext === 'PNG') {
+                var result = document.getElementById("imgPreview")
+                result.src = URL.createObjectURL(file)
+            } else {
+                alert("Wrong file type !!")
+            }
+
+        }
+    </script>
+}
+
+
+

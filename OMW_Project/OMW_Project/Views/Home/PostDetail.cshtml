@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "PostDetail";
+    Post post = ViewBag.PostDetail;
+}
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 mx-auto">
+                    <div class="cta-inner rounded">
+                        <h1>@post.Title</h1>
+                            @Html.Raw(post.Description)
+                            <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+

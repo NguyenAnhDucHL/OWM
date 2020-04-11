@@ -1,0 +1,53 @@
+﻿@model List<User>
+@{
+	ViewBag.Title = "Book";
+}
+@section NavBar{
+	<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+		<div style="width:100%">
+			<div class="col">
+				@Html.Partial("_PartialLoginButton")
+			</div>
+		</div>
+	</nav>
+}
+
+<section class="page-section cta">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 mx-auto">
+				<h1 class="card-text text-center">Danh sách bác sĩ</h1>
+				<div class="cta-inner rounded">
+
+					<div class="container">
+						<div class="row">
+							@foreach (var item in Model)
+							{
+								<div class="col-md-4" style="margin-bottom:20px">
+									<div class="card" style="width: 20rem;">
+										<img class="card-img-top" style="width: 80%; margin:20px auto" height="320" src="@(item.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")"
+											 alt="Card image cap">
+										<div class="card-block">
+											<h4 class="card-title text-center">@item.FullName</h4>
+											<p class="card-text text-center">Địa chỉ: @item.Address</p>
+											<p class="card-text text-center">Giới tính: @(item.Sex ? "Nam" : "Nữ")</p>
+											<div class="row">
+												<div class="col-md-12 text-center" style="margin-bottom:20px">
+													<a class="btn btn-primary" href="@Url.Action("DetailDoctor","Consulting",new { docId=item.Id})">Đăt lịch</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							}
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewBag.Title = "HistoryOrder";
+}
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label><b>Tên hàng</b> </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><b>Số lượng</b> </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><b>Đơn giá</b> </label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <label><b>Thành tiền</b></label>
+                                </div>
+                            </div>
+                            foreach (var subitem in item.OrderProducts)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label> @subitem.Product.ProductName</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>@subitem.Quantity</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>@subitem.UnitCost</label>
+                                    </div>
+                                    <div class="col-md-2 text-right">
+                                        <label>@subitem.TotalCost</label>
+                                    </div>
+                                </div>
+                            }
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label>Trạng thái: <b>@item.Status</b></label>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <label>Tổng tiền: <b>@item.TotalCost</b></label>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

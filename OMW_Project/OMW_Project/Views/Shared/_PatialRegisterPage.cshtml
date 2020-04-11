@@ -1,0 +1,28 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+	@*<button class="btn btn-info float-right" style="position:relative">@User.Identity.Name</button>*@
+	<div class="dropdown float-right">
+		<button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			@User.Identity.Name
+		</button>
+		@using (Html.BeginForm("LogOff", "Account", null, FormMethod.Post, new { id = "logoutForm" }))
+		{
+			@Html.AntiForgeryToken()
+		}
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="@Url.Action("ToProfile","Account")">Hồ sơ</a>
+			<a class="dropdown-item" href="@Url.Action("History","Consulting")">Lịch sử đặt lịch</a>
+			<a class="dropdown-item" href="@Url.Action("HistoryOrder","Home")">Lịch sử đặt hàng</a>
+			<a class="dropdown-item" href="#">Another action</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+		</div>
+	</div>
+}
+else
+{
+
+	<a class="btn btn-info float-right" href="@Url.Action("Login","Account",new { returnUrl=Url.Action("Index","Home")})">Đăng Nhập</a>
+	<a class="btn btn-info float-right" style="margin-right: 5px" href="@Url.Action("ForgotPassword","Account",new { returnUrl=Url.Action("Index","Home")})">Quên mật khẩu</a>
+}
+

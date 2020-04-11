@@ -1,0 +1,71 @@
+﻿@model User
+@{
+    ViewBag.Title = "ToProfile";
+}
+    <style>
+        .row{
+            margin:20px 0;
+        }
+    </style>
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner text-center rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+                        <div class="row">
+                            <img src="@Model.Image" alt="" width="200" height="300" style="margin:0 auto    " />
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9 float-right">
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9 float-right">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9 float-right">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-2 text-left">
+                                @(Model.Sex ? "Male" : "Female")
+                            </div>
+                        </div>
+                        <div class="row">
+                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9 float-right">
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="@Url.Action("EditProfile","Account")" class="btn btn-primary">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

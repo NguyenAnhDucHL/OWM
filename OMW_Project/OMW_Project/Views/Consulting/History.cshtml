@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Consulting>
+@{
+    ViewBag.Title = "History";
+}
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Thời gian: <b>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</b></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bác sĩ: <b>@item.Doctor.FullName</b></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="PatientIssue">PatientIssue</label>
+                                    <textarea class="form-control" disabled name="PatientIssue" rows="3">@item.PatientIssue</textarea>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

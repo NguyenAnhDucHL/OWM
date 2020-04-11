@@ -1,0 +1,136 @@
+﻿@model DoctorProfile
+@{
+	ViewBag.Title = "DetailDoctor";
+}
+<style>
+	.row {
+		margin: 20px 0
+	}
+</style>
+@{
+	var consultings = ViewBag.consultings as List<Consulting>;
+}
+
+@section NavBar{
+	<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+		<div style="width:100%">
+			<div class="col">
+				@Html.Partial("_PartialLoginButton")
+			</div>
+		</div>
+	</nav>
+}
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="../Shared/index.html">Đông Phương Y Học</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav mx-auto">
+				<li class="nav-item px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "Home", new { area = "" })">
+						Trang Chủ
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item  px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("About", "Home", new { area = "" })">Giới Thiệu</a>
+				</li>
+				<li class="nav-item px-lg-4">
+					<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Store", "Home", new { area = "" })">Sản Phẩm</a>
+				</li>
+				@if (!User.IsInRole("Doctor"))
+				{
+					<li class="nav-item active px-lg-4">
+						<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Book", "Consulting")">Đặt lịch bác sĩ</a>
+					</li>
+				}
+				@if (Request.IsAuthenticated && !User.IsInRole("User"))
+				{
+					<li class="nav-item px-lg-4">
+						<a class="nav-link text-uppercase text-expanded" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">CMS</a>
+					</li>
+				}
+
+			</ul>
+		</div>
+	</div>
+</nav>
+<section class="page-section cta">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 mx-auto">
+				<div class="cta-inner rounded">
+					<!-- Main -->
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+								<img src="@Model.User.Image" alt="" width="300" height="450" style="margin: 0 auto" />
+							</div>
+							<div class="col-md-7">
+								<h2>Tên bác sĩ: @Model.User.FullName</h2>
+								<p>Giới tính: @(Model.User.Sex?"Nam":"Nữ") </p>
+								<p>CMTND/CCCD: @Model.CMT</p>
+								<p>Ngày cấp: @Model.DateRange.ToString("dd/MM/yyyy")</p>
+								<p>Nới làm việc: @Model.Workplace</p>
+								<p>Kinh nghiệm làm việc: @Model.Experience</p>
+							</div>
+						</div>
+						<hr/>
+						<div class="row text-center">
+							<div class="col-md-12">
+								<h3 class="">Lịch tư vấn</h3>
+							</div>
+						</div>
+						@if (consultings.Count > 0)
+						{
+							using (Html.BeginForm("Book", "Consulting", FormMethod.Post))
+							{
+								foreach (var item in consultings)
+								{
+									<div class="row text-center">
+										<div class="col-md-12 h4">
+											<input type="radio" name="ConsultingId" value="@item.ConsultingId" />
+											<label><b>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</b></label>
+										</div>
+									</div>
+									<hr />
+								}
+								<div class="row">
+									<div class="col-md-2">
+										<label>Vấn đề của bạn</label>
+									</div>
+									<div class="col-md-10">
+										<textarea class="form-control" rows="3" name="PatientIssue"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button type="submit" class="btn btn-success">Save</button>
+									</div>
+								</div>
+							}
+							
+						
+						}
+						else
+						{
+							<div class="row text-center">
+								<div class="col-md-12">
+									<h3 class="">Bác sĩ hiện đang bận!</h3>
+								</div>
+							</div>
+						}
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<a class="btn btn-primary" href="@Url.Action("Book","Consulting")">Quay lại</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

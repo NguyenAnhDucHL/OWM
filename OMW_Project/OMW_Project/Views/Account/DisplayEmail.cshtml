@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "DEMO purpose Email Link";
+}
+@*<section class="page-section cta">
+        <div class="container">
+
+            <p class="text-info">
+                Vui lòng kiểm tra email của bạn và xác nhận địa chỉ email của bạn.
+            </p>
+            <p class="text-danger">
+                Chỉ dành cho DEMO: Bạn có thể nhấp vào liên kết này để xác nhận email: <a href="@ViewBag.Link">link</a>
+                Vui lòng thay đổi mã này để đăng ký dịch vụ email trong IdentityConfig để gửi email.
+            </p>
+        </div>
+    </section>*@
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-info">
+                                    Vui lòng kiểm tra email của bạn và xác nhận địa chỉ email của bạn.
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Nhấn vào <a href="@Url.Action("Login","Account")">Đây</a> để đăng nhập</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

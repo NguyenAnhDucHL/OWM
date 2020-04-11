@@ -1,0 +1,13 @@
+﻿<configuration>
+  <system.web.webPages.razor>
+    <pages pageBaseType="System.Web.Mvc.WebViewPage">
+      <namespaces>
+        <add namespace="Microsoft.Owin.Security"/>
+        <add namespace="Microsoft.AspNet.Identity" />
+        <add namespace="Microsoft.AspNet.Identity.EntityFramework"/>
+        <add namespace="$rootnamespace$.Models"/>
+        <add namespace="$rootnamespace$.ViewModels"/>
+      </namespaces>
+    </pages>
+  </system.web.webPages.razor>
+</configuration>

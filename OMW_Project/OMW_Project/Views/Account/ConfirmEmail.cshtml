@@ -1,0 +1,26 @@
+﻿@{
+	ViewBag.Title = "Confirm Email";
+}
+
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+
+                    <!-- Main -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    Bạn đã xác nhận email. @Html.ActionLink("Kích vào đây để đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
