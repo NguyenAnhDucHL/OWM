@@ -1,0 +1,18 @@
+/*body {
+  padding-top: 80px;
+}*/ 
+/*Sau chay tren db bo cai này di*/ 
+
+ 
+.show-cart li {
+  display: flex;
+}
+.card {
+  margin-bottom: 20px;
+  padding-bottom:25px
+}
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}

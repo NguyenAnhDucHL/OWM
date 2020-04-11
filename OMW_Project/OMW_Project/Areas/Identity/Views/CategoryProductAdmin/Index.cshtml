@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CategoryProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách thể lại sản phẩm</h2>
+
+
+<div>
+	<a class="btn btn-success" href="@Url.Action("Create", "CategoryProductAdmin")">Tạo Thể loại</a>
+	<br/>
+</div>
+<hr/>
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th>Tên danh mục</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr role="row" class="odd">
+                            <td class="sorting_1"><a href="@Url.Action("Details", "CategoryProductAdmin", new { id = item.CategoryProductId})">@item.CategoryName</a></td>
+	                        <td>
+		                        <a class="btn btn-info" href="@Url.Action("Edit", "CategoryProductAdmin", new { id = item.CategoryProductId })">Sửa</a>
+		                        <a class="btn btn-danger" href="@Url.Action("Delete", "CategoryProductAdmin", new { id = item.CategoryProductId })">Xóa</a>
+	                        </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $('#example1').DataTable();
+    </script>
+}

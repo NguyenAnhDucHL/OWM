@@ -1,0 +1,52 @@
+﻿@model IdentityRole
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết vai trò</h2>
+
+<div>
+
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			Quyền hạn
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+	</dl>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<h4>Danh sách người dùng trong vai trò này!</h4>
+		@if (ViewBag.UserCount == 0)
+		{
+			<hr />
+			<p>Không tìm thấy người dùng trong vai trò này.</p>
+		}
+
+		<table class="table">
+
+			@foreach (var item in ViewBag.Users)
+			{
+				<tr>
+					<td>
+						@item.UserName
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<a class="btn btn-info" href="@Url.Action("Edit", "RolesAdmin", new { id = Model.Id })">Sửa</a>
+		<a class="btn btn-default" href="@Url.Action("Index", "RolesAdmin")">Quay lại</a>
+	</div>
+</div>
+
+
+
+

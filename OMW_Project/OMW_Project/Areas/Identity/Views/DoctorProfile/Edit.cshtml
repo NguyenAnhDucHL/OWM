@@ -1,0 +1,128 @@
+﻿@model EditUserViewModel
+
+@{
+
+    /**/
+    ViewBag.Title = "Edit";
+}
+
+<h2>Sửa thông tin bác sĩ</h2>
+
+
+@using (Html.BeginForm("Edit", "DoctorProfile", FormMethod.Post, new { @class = "form-horizontal", role = "form",enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+	    <hr />
+        <div class="row">
+	        <div class="col-md-8">
+		        @Html.ValidationSummary(true)
+		        @Html.HiddenFor(model => model.Id)
+
+		        <div class="form-group">
+			        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
+
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        <label class="control-label col-md-2">Image</label>
+
+			        <div class="col-md-3">
+				        <input type="file" name="myfile" id="myfile" onchange="previewImg(event)">
+			        </div>
+			        <div class="col-md-7">
+				        <img id="imgPreview" src="@Model.Image" width="200" height="300" />
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(model => model.FullName, new { @class = "control-label col-md-2" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+				        @Html.ValidationMessageFor(model => model.FullName)
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
+			        <div class="col-md-10">
+				        <input type="radio" name="Sex" value="true" class="checkbox-inline" @(Model.Sex ? "checked" : "") />
+				        @Html.Label("Nam", new { @class = "control-label" })
+				        <input type="radio" name="Sex" value="false" class="checkbox-inline" @(!Model.Sex ? "checked" : "") />
+				        @Html.Label("Nữ", new { @class = "control-label" })
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+				        @Html.ValidationMessageFor(model => model.Address)
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+				        @Html.ValidationMessageFor(model => model.PhoneNumber)
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(m => m.CMT, new { @class = "col-md-2 control-label" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.CMT, new { @class = "form-control" })
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(m => m.Workplace, new { @class = "col-md-2 control-label" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.Workplace, new { @class = "form-control" })
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(m => m.DateRange, new { @class = "col-md-2 control-label" })
+			        <div class="col-md-10">
+				        @Html.TextBoxFor(m => m.DateRange, new { @class = "form-control" })
+			        </div>
+		        </div>
+		        <div class="form-group">
+			        @Html.LabelFor(m => m.Experience, new { @class = "col-md-2 control-label" })
+			        <div class="col-md-10">
+				        @Html.TextAreaFor(m => m.Experience, new { @class = "form-control" })
+			        </div>
+		        </div>
+	        </div>
+	        <div class="form-group">
+		        <div class="col-md-offset-4 col-md-10">
+			        <input type="submit" value="Sửa" class="btn btn-info" />
+					<a class="btn btn-default" href="@Url.Action("Index", "DoctorProfile")">Quay lại</a>
+		        </div>
+	        </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#DateRange').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+		})
+        var previewImg = function () {
+	        var file = event.target.files[0];
+	        const name = file.name;
+	        const lastDot = name.lastIndexOf('.');
+	        const ext = name.substring(lastDot + 1);
+	        if (ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'JPG' || ext === 'JPEG' || ext === 'PNG') {
+		        var result = document.getElementById("imgPreview")
+		        result.src = URL.createObjectURL(file)
+	        } else {
+		        alert("Wrong file type !!")
+	        }
+
+        }
+    </script>
+}

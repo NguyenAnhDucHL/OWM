@@ -1,0 +1,87 @@
+﻿@model DoctorProfile
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Thông tin bác sĩ</h2>
+
+<div>
+	<h4>Bác sĩ</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			Email:
+		</dt>
+		<dd>
+			@Model.User.Email
+		</dd>
+		<dt>
+			Ảnh đại diện:
+		</dt>
+		<dd>
+			<img src="@Model.User.Image" width="200" height="300" alt="" />
+		</dd>
+		<dt>
+			Họ tên:
+		</dt>
+		<dd>
+			@Model.User.FullName
+		</dd>
+		<dt>
+			Giới tính:
+		</dt>
+		<dd>
+			@(Model.User.Sex ? "Nam" : "Nữ")
+		</dd>
+		<dt>
+			Địa chỉ:
+		</dt>
+		<dd>
+			@Model.User.Address
+		</dd>
+		<dt>
+			Số điện thoại:
+		</dt>
+		<dd>
+			@Model.User.PhoneNumber
+		</dd>
+
+		<dt>
+			CMT:
+		</dt>
+		<dd>
+			@Model.CMT
+		</dd>
+		<dt>
+			Thời gian làm việc:
+		</dt>
+		<dd>
+			@Model.DateRange.ToShortDateString()
+		</dd>
+		<dt>
+			Địa điểm làm việc:
+		</dt>
+		<dd>
+			@Model.Workplace
+		</dd>
+		<dt>
+			Kinh nghiệm:
+		</dt>
+		<dd>
+			@Model.Experience
+		</dd>
+
+
+	</dl>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<a class="btn btn-info" href="@Url.Action("Edit", "DoctorProfile", new { id = Model.UserId })">Sửa</a>
+		<a class="btn btn-default" href="@Url.Action("Index", "DoctorProfile")">Quay lại</a>
+	</div>
+</div>
+
+
+
+

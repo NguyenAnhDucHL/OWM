@@ -1,0 +1,168 @@
+﻿@model OMW_Project.Models.User
+
+@{
+    ViewBag.Title = "Profile";
+}
+<link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+<h2>Profile</h2>
+
+<div class="container">
+    <form class="form-horizontal">
+        @Html.HiddenFor(m => m.Id, new { @class = "form-control", @readonly = "readonly",id="UserId" })
+
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Hình đại diện:</label>
+            <div class="col-md-10">
+                <img src="@(Model.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="200" height="300" style="margin:0 auto" alt="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Địa chỉ email:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Số điện thoại:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Địa chỉ</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Tên đầy đủ:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Giới tính:</label>
+            <div class="col-md-10">
+                @Html.TextBox("Sex", Model.Sex ? "Male" : "Female", new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        @if (User.IsInRole("Doctor"))
+        {
+            var docprofile = ViewBag.docProfile as DoctorProfile;
+            var listConsulting = ViewBag.consulting as List<Consulting>;
+
+            <h1 class="text-center">Thông tin bác sĩ</h1>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="email">CMT:</label>
+                <div class="col-md-10">
+                    @Html.TextBox("CMT", docprofile.CMT, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="email">Ngày cấp:</label>
+                <div class="col-md-10">
+                    @Html.TextBox("DateRange", docprofile.DateRange.ToString("dd/MM/yyyy"), new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="email">Nơi làm việc:</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Workplace", docprofile.Workplace, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="email">Kinh nghiệm:</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Experiences", docprofile.Experience, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <h1 class="text-center">Lịch Hẹn</h1>
+            if (listConsulting == null || listConsulting.Count == 0)
+            {
+                <p>Hiện chưa có lịch nào</p>
+            }
+            else
+            {
+                <style>
+                    table, td, th {
+                        border-color: #209de1 !important
+                    }
+                </style>
+                <table class="table table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:25%">Thời gian</th>
+                            <th style="width:60%">Ghi chú</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in listConsulting)
+                        {
+                            <tr>
+                                <td><p>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</p> </td>
+                                <td><p>@item.PatientIssue</p></td>
+                                <td><button type="button" class="btn btn-sm btn-@(item.Status?"success":"warning")">@(item.Status ? "Booked" : "Not Booked")</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+        }
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Thêm lịch rảnh:</label>
+            <div class="col-md-6">
+                <p class="text-warning" id="error-msg"></p>
+                <div class='input-group date' id='datetimepicker1'>
+                    @Html.TextBox("StartConsulting", "", new { @class = "form-control", @readonly = "" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <button type="button" id="addConsulting" class="btn btn-primary ">
+                Lưu
+            </button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY   HH:mm',
+            stepping: 5,
+            ignoreReadonly: true
+        });
+        $("#addConsulting").click(function (e) {
+            e.preventDefault();
+            var time = $("#StartConsulting").val();
+            if (time !== "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Consultings/AddConsultingByDoc",
+                    data: {
+                        StartConsulting: time,
+                        DoctorId:$("#UserId").val()
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.IsSuccess) {
+                            alert("Thành công");
+                            location.reload();
+                        } else {
+                            $("#error-msg").text(response.erroMsg);
+                        }
+                    }
+                });
+            } else {
+                alert("Hãy chọn thời gian")
+            }
+        });
+    </script>
+}

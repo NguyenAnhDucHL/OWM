@@ -1,0 +1,56 @@
+﻿@model IEnumerable<OMW_Project.Models.Consulting>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+	                    <th>Tên bác sĩ</th>
+	                    <th>Tên bênh nhân</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr role="row" class="odd">
+	                        <td class="sorting_1">@Html.DisplayFor(modelItem => item.Doctor.FullName)</td>
+	                        <td>@Html.DisplayFor(modelItem => item.Patient.FullName)</td>
+                            <td>
+                                @item.StartConsulting
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ConsultingId }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ConsultingId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ConsultingId })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $('#example1').DataTable();
+
+    </script>
+}
+
+

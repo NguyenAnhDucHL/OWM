@@ -1,0 +1,32 @@
+﻿@model IdentityRole
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn chắc chắn muốn xóa vai trò này? </h3>
+<p>Xóa vai trò này sẽ xóa tất cả người dùng khỏi vai trò này. Nó sẽ không xóa người dùng.</p>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Quyền hạn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> 
+			<a class="btn btn-default" href="@Url.Action("Index", "RolesAdmin")">Quay lại</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿@model OMW_Project.Models.Consulting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Consulting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Bác sĩ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.FullName)
+        </dd>
+
+        <dt>
+			Tên bệnh nhân
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientIssue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientIssue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartConsulting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartConsulting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ConsultingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,213 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Tạo tài khoản</h2>
+
+@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submit", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label class="col-md-2 control-label">Email <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Họ tên <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FullName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Ảnh</label>
+
+                <div class="col-md-3">
+                    <input type="file" name="myfile" id="myfile" onchange="previewImg(event)">
+                </div>
+                <div class="col-md-7">
+                    <img id="imgPreview" width="200" height="300" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Giới tính <label style="color:red"> *</label></label>
+                @Html.ValidationMessageFor(model => model.Sex)
+                <div class="col-md-10">
+                    <input type="radio" name="Sex" value="true" class="checkbox-inline" checked />
+                    @Html.Label("Nam", new { @class = "control-label" })
+                    <input type="radio" name="Sex" value="false" class="checkbox-inline" />
+                    @Html.Label("Nữ", new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Địa chỉ <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Số điện thoại <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mật khẩu <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", name = "Password" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Xác nhận Mật khẩu <label style="color:red"> *</label></label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="more" class="hide">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">CMTND/CCCD <label style="color:red"> *</label></label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.CMT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CMT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Ngày cấp <label style="color:red"> *</label></label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.DateRange, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DateRange, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Nơi làm việc <label style="color:red"> *</label></label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Workplace, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Workplace, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Kinh nghiệm làm việc <label style="color:red"> *</label></label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.Experience, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    Vai trò
+                </label>
+                <div class="col-md-10">
+                    @foreach (var item in (SelectList)ViewBag.RoleId)
+                    {
+                        <input type="radio" name="SelectedRoles" value="@item.Value" checked class="checkbox-inline" />
+                        @Html.Label(item.Value, new { @class = "control-label" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="btncreate" type="submit" class="btn btn-success" value="Tạo" />
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            console.log('validate:')
+            console.log($('#submit'));
+            $("#submit").validate({
+                rules: {
+                    Email: {
+                        required: true,
+                    },
+                    FullName: {
+                        required: true,
+                        minlength:3
+                    },
+                    PhoneNumber:
+                    {
+                        required: true,
+                        pattern:/^\d{10,10}$/
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 6,
+                        pattern: /(?=^.{6,}$)((?=.*\d)|(?=.*\W +))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+                    }
+                },
+                messages: {
+                    Email: {
+                        required: "Email không được để trống",
+                    },
+                    FullName: {
+                        required: "Họ tên không được để trống",
+                        minlength:"Họ tên phải có ít nhất 3 ký tự"
+                    },
+                    PhoneNumber:
+                    {
+                        required: "Số điện thoại không được để trống",
+                        pattern: "Số điện thoại phải có 10 chữ số"
+                    },
+                    Password: {
+                        required: "Mật khẩu không được để trống",
+                        minlength: "Mật khẩu phải có ít nhất 6 ký tự",
+                        pattern:
+                            "Mật khẩu phải bao gồm một chữ cái viết hoa, một chữ cái viết thường và một số hoặc ký tự đặc biệt."
+                    }
+                }
+            })
+        })
+        $('#DateRange').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+        })
+        $("input[type='radio']").change(function (e) {
+            e.preventDefault();
+            if ($("input[type='radio'][value='Doctor']").is(':checked')) {
+                $("#more").removeClass("hide");
+            } else {
+                $("#more").addClass("hide");
+            }
+
+        });
+        var previewImg = function () {
+            var file = event.target.files[0];
+            const name = file.name;
+            const lastDot = name.lastIndexOf('.');
+            const ext = name.substring(lastDot + 1);
+            if (ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'JPG' || ext === 'JPEG' || ext === 'PNG') {
+                var result = document.getElementById("imgPreview")
+                result.src = URL.createObjectURL(file)
+            } else {
+                alert("Wrong file type !!")
+            }
+
+        }
+        jQuery.validator.addMethod("pattern",
+            function (value, element, param) {
+                debugger
+                return param.test(value);
+            });
+    </script>
+
+}

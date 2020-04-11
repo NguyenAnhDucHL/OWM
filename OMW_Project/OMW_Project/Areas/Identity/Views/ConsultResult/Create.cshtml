@@ -1,0 +1,150 @@
+﻿@model Consulting
+@{
+    ViewBag.Title = "Create";
+}
+@{
+    var products = ViewBag.Products as List<Product>;
+}
+<style>
+    table tbody tr td, thead tr th {
+        border: 1px solid gray
+    }
+</style>
+<link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+<div class="form-horizontal">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12 text-center">
+                <img src="@(Model.Patient.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="250" height="300" />
+                @Html.HiddenFor(m=>m.ConsultingId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Patient.FullName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Patient.FullName, new { @class = "form-control", @readonly = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartConsulting, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <input type="text" class="form-control" value="@Model.StartConsulting.ToString("dd/MM/yyyy HH:mm")" readonly />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PatientIssue, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PatientIssue, new { @class = "form-control", @readonly = "" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-md-2">ContactMedia</label>
+            <div class="col-md-10">
+                <input type="text" name="ContactMedia" id="ContactMedia" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Contact Result</label>
+            <div class="col-md-10">
+                <input type="text" name="ContactResult" id="ContactResult" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Suggestion</label>
+            <div class="col-md-10">
+                <input type="text" name="Suggestion" id="Suggestion" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Treament Duration</label>
+            <div class="col-md-10">
+                <input type="number" name="TreamentDuration" id="TreamentDuration" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Contact Time</label>
+            <div class="col-md-4">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" name="ContactTime" id="ContactTime" readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Next Contact Time</label>
+            <div class="col-md-4">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type="text" name="NextContactTime" id="NextContactTime" readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="text-center">Sản phẩm khuyến nghị</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width:5%"></th>
+                    <th style="width:10%">Image</th>
+                    <th style="width:25%">Thông tin</th>
+                    <th style="text-align:center">Chú thích</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in products)
+                {
+                    <tr>
+                        <td style="vertical-align:middle;text-align:center">
+                            <input type="checkbox" class="check_product" />
+                            <input type="hidden" value="@item.ProductId" />
+                        </td>
+                        <td> <img src="@(item.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" height="100" alt="" /></td>
+                        <td style="position:relative">
+                            <p style="font-size:22px;font-weight:bold;margin-bottom:35px">@item.ProductName</p>
+                            <div style="position:absolute;bottom:10px;">
+                                <span>Số lượng :</span>
+                                <input style="width:auto;display:inline" type="number" min="1" class="form-control Quantity"  />
+                            </div>
+                        </td>
+                        <td>
+                            <textarea class="form-control Dosage" style="min-height:100px" ></textarea>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="btn_Save" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY   HH:mm',
+            stepping: 5,
+            ignoreReadonly: true
+        });
+
+        $('#datetimepicker2').datetimepicker({
+            format: 'DD/MM/YYYY   HH:mm',
+            stepping: 5,
+            ignoreReadonly: true
+        });
+    </script>
+    <script src="~/Assets/js/ConsultResult.js"></script>
+}

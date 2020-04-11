@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNet.Identity.Owin
+@using Microsoft.AspNet.Identity
+@using OMW_Project.Models
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>OMW</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	@Styles.Render("~/LTE/Required/css")
+	<!-- Google Font -->
+	<link href="~/Assets/Content/fontawesome.css" rel="stylesheet" />
+
+	<link rel="stylesheet" href="~/Assets/Content/toastr.min.css" />
+
+	<style>
+
+		label.error {
+			color: red;
+		}
+	</style>
+	@{
+		var user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+		if (user != null)
+		{
+			<script>
+				var User = {
+					name: "@(user==null?"": user.UserName)",
+					id: "@(user==null?"": user.Id)"
+				}
+			</script>
+		}
+	}
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<!-- Main Header -->
+		@Html.Partial("_PartialHeader")
+
+		<!-- Left side column. contains the logo and sidebar -->
+		@Html.Partial("_PartialSideBar")
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			@RenderSection("header", required: false)
+
+			@*<section class="content-header">
+					<h1>
+						Page Header
+						<small>Optional description</small>
+					</h1>
+					<ol class="breadcrumb">
+						<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+						<li class="active">Here</li>
+					</ol>
+				</section>*@
+
+			<!-- Main content -->
+			<section class="content container-fluid">
+
+				@RenderBody()
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- Main Footer -->
+		@Html.Partial("_PartialFooter")
+	</div>
+	<!-- ./wrapper -->
+
+	@Scripts.Render("~/LTE/Required/js")
+	@Scripts.Render("~/jquery/validate")
+	<script src="~/Assets/Content/toastr.min.js"></script>
+	@RenderSection("scripts", required: false)
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+	Both of these plugins are recommended to enhance the
+	user experience. -->
+</body>
+</html>
+@*<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+		<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Cấp độ người dùng</a>
+		<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+		<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+		<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+	</div>
+	<div class="tab-content" id="v-pills-tabContent">
+		<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+			<a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin", new { area = "Identity" })"></a>
+
+		</div>
+		<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+			<a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">Users Admin</a>
+			<a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">Users Admin</a>
+		</div>
+		<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+		<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+	</div>*@

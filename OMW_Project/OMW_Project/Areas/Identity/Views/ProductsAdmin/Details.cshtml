@@ -1,0 +1,74 @@
+﻿@model OMW_Project.Models.Product
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.CategoryProduct.CategoryName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CategoryProduct.CategoryName)
+		</dd>
+
+
+		<dt>
+			@Html.DisplayNameFor(model => model.ProductName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.ProductName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Image)
+		</dt>
+
+		<dd>
+			<img src="@Model.Image" alt="" width="200" height="300" />
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Drugstore)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Drugstore)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.OriginPrice)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.OriginPrice)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.SalePrice)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.SalePrice)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Description)
+		</dt>
+
+		<dd>
+			<div class="col-md-8">@Html.Raw(Model.Description)</div>
+		</dd>
+	</dl>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<a class="btn btn-info" href="@Url.Action("Edit", "ProductsAdmin", new { id = Model.ProductId })">Sửa</a>
+		<a class="btn btn-default" href="@Url.Action("Index", "ProductsAdmin")">Quay lại</a>
+	</div>
+</div>

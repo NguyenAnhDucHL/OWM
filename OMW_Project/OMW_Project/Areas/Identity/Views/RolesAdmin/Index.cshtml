@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Danh sách vai trò</h2>
+
+<div>
+	<a class="btn btn-success" href="@Url.Action("Create", "RolesAdmin")">Tạo Vai trò</a>
+	<br />
+</div>
+<hr />
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+	<div class="row">
+		<div class="col-sm-12">
+			<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<thead>
+					<tr>
+						<th>Quyền hạn</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr role="row" class="odd">
+							<td class="sorting_1"><a href="@Url.Action("Details", "RolesAdmin", new { id = item.Id})">@item.Name</a></td>
+							<td>
+								<a class="btn btn-info" href="@Url.Action("Edit", "RolesAdmin", new { id = item.Id })">Sửa</a>
+								<a class="btn btn-danger" href="@Url.Action("Delete", "RolesAdmin", new { id = item.Id })">Xóa</a>
+							</td>
+
+						</tr>
+					}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+</div>
+@section scripts{
+	<script>
+		$('#example1').DataTable();
+	</script>
+}

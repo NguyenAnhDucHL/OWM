@@ -1,0 +1,33 @@
+﻿@model OMW_Project.Models.CategoryPost
+
+@{
+	ViewBag.Title = "Create";
+}
+
+
+<h2>Xóa</h2>
+
+<h3>Bạn chắc chắn muốn xóa thể loại này?</h3>
+
+<hr />
+<dl class="dl-horizontal">
+	<dt>
+		@Html.DisplayNameFor(model => model.CategoryName)
+	</dt>
+
+	<dd>
+		@Html.DisplayFor(model => model.CategoryName)
+	</dd>
+
+</dl>
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Xóa" class="btn btn-danger" />
+			<a class="btn btn-default" href="@Url.Action("Index", "CategoryPostAdmin")">Quay lại</a>
+		</div>
+	</div>
+}
+

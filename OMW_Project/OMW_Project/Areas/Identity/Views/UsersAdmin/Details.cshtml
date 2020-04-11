@@ -1,0 +1,95 @@
+﻿@model User
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết người dùng</h2>
+
+<div>
+
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			Email:
+		</dt>
+		<dd>
+			@Model.Email
+		</dd>
+		<dt>
+			Họ tên:
+		</dt>
+		<dd>
+			@Model.FullName
+		</dd>
+		<dt>
+			Giới tính:
+		</dt>
+		<dd>
+			@(Model.Sex ? "Male" : "Female")
+		</dd>
+		<dt>
+			Ảnh đại diện:
+		</dt>
+		<dd>
+			<img src="@Model.Image" width="200" height="300" alt="" />
+		</dd>
+		<dt>
+			Địa chỉ:
+		</dt>
+		<dd>
+			@Model.Address
+		</dd>
+		<dt>
+			Số điện thoại:
+		</dt>
+		<dd>
+			@Model.PhoneNumber
+		</dd>
+		@if (ViewBag.RoleNames.Contains("Doctor"))
+		{
+			var doc = ViewBag.DoctorProfile as DoctorProfile;
+			<dt>
+				CMT:
+			</dt>
+			<dd>
+				@doc.CMT
+			</dd>
+			<dt>
+				Thời gian làm việc:
+			</dt>
+			<dd>
+				@doc.DateRange
+			</dd>
+			<dt>
+				Địa điểm làm việc:
+			</dt>
+			<dd>
+				@doc.Workplace
+			</dd>
+			<dt>
+				Kinh nghiệm:
+			</dt>
+			<dd>
+				@doc.Experience
+			</dd>
+		}
+		<dt>
+			Vai trò:
+		</dt>
+		<dd>
+			@foreach (var item in ViewBag.RoleNames)
+			{
+				@item
+				<hr />
+			}
+		</dd>
+	</dl>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<a class="btn btn-info" href="@Url.Action("Edit", "UsersAdmin", new { id = Model.Id })">Sửa</a>
+		<a class="btn btn-default" href="@Url.Action("Index", "UsersAdmin")">Quay lại</a>
+	</div>
+</div>
+

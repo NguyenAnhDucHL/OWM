@@ -1,0 +1,28 @@
+﻿@model OMW_Project.Models.CategoryProduct
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết thể loại sản phẩm</h2>
+
+<div>
+
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CategoryName)
+		</dd>
+
+	</dl>
+</div>
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<a class="btn btn-info" href="@Url.Action("Edit", "CategoryProductAdmin", new { id = Model.CategoryProductId })">Sửa</a>
+		<a class="btn btn-default" href="@Url.Action("Index", "CategoryProductAdmin")">Quay lại</a>
+	</div>
+</div>
