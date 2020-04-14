@@ -123,23 +123,23 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input id="btncreate" type="submit" class="btn btn-success" value="Tạo" />
+            <a class="btn btn-default" href="@Url.Action("Index", "UsersAdmin")">Quay lại</a>
         </div>
     </div>
 }
-<div>
-    @Html.ActionLink("Quay lại", "Index")
-</div>
 @section Scripts {
     <script>
         $(document).ready(function () {
-            console.log('validate:')
-            console.log($('#submit'));
             $("#submit").validate({
                 rules: {
                     Email: {
                         required: true,
                     },
                     FullName: {
+                        required: true,
+                        minlength:3
+                    },
+                    Address: {
                         required: true,
                         minlength:3
                     },
@@ -161,6 +161,10 @@
                     FullName: {
                         required: "Họ tên không được để trống",
                         minlength:"Họ tên phải có ít nhất 3 ký tự"
+                    },
+                    Address: {
+                        required: "Địa chỉ không được để trống",
+                        minlength:"Địa phải có ít nhất 3 ký tự"
                     },
                     PhoneNumber:
                     {

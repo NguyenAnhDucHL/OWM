@@ -185,11 +185,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Identity\Controllers\CategoryPostAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\CategoryProductAdminController.cs" />
-    <Compile Include="Areas\Identity\Controllers\ConsultingsController.cs" />
+    <Compile Include="Areas\Identity\Controllers\ConsultingAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\ConsultResultController.cs" />
+    <Compile Include="Areas\Identity\Controllers\DoctorPaymentController.cs" />
     <Compile Include="Areas\Identity\Controllers\DoctorProfileController.cs" />
     <Compile Include="Areas\Identity\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\PostsAdminController.cs" />
+    <Compile Include="Areas\Identity\Controllers\PostsDoctorController.cs" />
     <Compile Include="Areas\Identity\Controllers\ProductsAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\SlidersController.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Models\ProductSuggest.cs" />
     <Compile Include="Models\ProjectDbContext.cs" />
     <Compile Include="Models\ProjectDbInitializer.cs" />
+    <Compile Include="Models\RequireAuthorizeFront.cs" />
     <Compile Include="Models\Slider.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,7 +325,9 @@
     <Content Include="Assets\img\cao-hong-sam-daedong-120gr-xuat-my-3-510x510.jpg" />
     <Content Include="Assets\img\cao-hong-sam-daedong-120gr-xuat-my-4-510x510.jpg" />
     <Content Include="Assets\img\CaoHongSam.png" />
-    <Content Include="Assets\img\Capture.PNG" />
+    <Content Include="Assets\img\newBg.PNG" />
+    <Content Include="Assets\img\post1.png" />
+    <Content Include="Assets\img\banner.PNG" />
     <Content Include="Assets\img\Chanom.png" />
     <Content Include="Assets\img\Chinese-medicine.jpeg" />
     <Content Include="Assets\img\chinese-medicine.jpg" />
@@ -369,6 +374,7 @@
     <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Assets\js\modernizr-2.8.3.js" />
     <Content Include="Assets\js\Order.js" />
+    <Content Include="Assets\js\OrderWithDoctor.js" />
     <Content Include="Assets\js\popper.min.js" />
     <Content Include="Assets\js\popper.min.js.map" />
     <Content Include="Assets\js\respond.js" />
@@ -6712,11 +6718,11 @@
     <Content Include="Areas\Identity\Views\ProductsAdmin\Details.cshtml" />
     <Content Include="Areas\Identity\Views\ProductsAdmin\Edit.cshtml" />
     <Content Include="Areas\Identity\Views\ProductsAdmin\Index.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\Create.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\Delete.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\Details.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\Edit.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\Create.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\Delete.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\Details.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\Edit.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\Index.cshtml" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -6794,8 +6800,8 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
-    <Content Include="Areas\Identity\Views\Consultings\MetAndMeeting.cshtml" />
-    <Content Include="Areas\Identity\Views\Consultings\NotMetYet.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\MetAndMeeting.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\NotMetYet.cshtml" />
     <Content Include="Areas\Identity\Views\CategoryProductAdmin\Create.cshtml" />
     <Content Include="Areas\Identity\Views\CategoryProductAdmin\Delete.cshtml" />
     <Content Include="Areas\Identity\Views\CategoryProductAdmin\Details.cshtml" />
@@ -6811,6 +6817,20 @@
     <Content Include="Areas\Identity\Views\UsersAdmin\MyProfile.cshtml" />
     <Content Include="Areas\Identity\Views\ConsultResult\Index.cshtml" />
     <Content Include="Areas\Identity\Views\ConsultResult\Create.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsAdmin\Home.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsDoctor\Create.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsDoctor\Delete.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsDoctor\Details.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsDoctor\Edit.cshtml" />
+    <Content Include="Areas\Identity\Views\PostsDoctor\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\OrderAdmin\Edit.cshtml" />
+    <Content Include="Areas\Identity\Views\OrderAdmin\Processed.cshtml" />
+    <Content Include="Areas\Identity\Views\OrderAdmin\NoProcessed.cshtml" />
+    <Content Include="Areas\Identity\Views\OrderAdmin\Delete.cshtml" />
+    <Content Include="Areas\Identity\Views\DoctorPayment\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\DoctorPayment\Details.cshtml" />
+    <Content Include="Areas\Identity\Views\OrderAdmin\GetAllThisMonth.cshtml" />
+    <Content Include="Areas\Identity\Views\ConsultingAdmin\ViewResult.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Store.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
@@ -6827,6 +6847,13 @@
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Home\CategoryDetail.cshtml" />
     <Content Include="Views\Home\PostDetail.cshtml" />
+    <Content Include="Views\Consulting\ViewResult.cshtml" />
+    <Content Include="Views\Home\OrderWithDoctor.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Shared\_CartModel.cshtml" />
+    <Content Include="Views\Consulting\Index.cshtml" />
+    <Content Include="Views\Consulting\EditConsulting.cshtml" />
+    <Content Include="Views\Consulting\ConsultingPresent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Assets\Vender\bower_components\moment\moment.d.ts" />

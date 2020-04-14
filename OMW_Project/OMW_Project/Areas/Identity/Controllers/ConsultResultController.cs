@@ -42,9 +42,13 @@ namespace OMW_Project.Areas.Identity.Controllers
         [HttpPost]
         public ActionResult Create(ConsultResult consultResult)
         {
+
             _consultResultRepository.Add(consultResult);
             if (true)
             {
+                var consulting = _consultingRepository.Find(consultResult.ConsultingId);
+                consulting.HasResult = true;
+                _consultingRepository.Update(consulting);
                 return Json(new { IsSuccess = true });
             }
             return View();

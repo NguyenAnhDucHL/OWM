@@ -42,5 +42,10 @@ namespace OMW_Project.Repositories
         {
             return db.ConsultResults.ToList();
         }
+
+        public ConsultResult FindByConsultingId(string consultingtId)
+        {
+            return db.ConsultResults.Include(c=>c.Consulting.Doctor).Include(c=>c.ProductSuggests.Select(x=>x.Product)).Include(c=>c.ProductSuggests).FirstOrDefault(c => c.ConsultingId.Equals(consultingtId));
+        }
     }
 }

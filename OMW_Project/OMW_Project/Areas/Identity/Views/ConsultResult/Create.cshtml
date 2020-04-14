@@ -7,7 +7,8 @@
 }
 <style>
     table tbody tr td, thead tr th {
-        border: 1px solid gray
+        border: 1px solid gray;
+        text-align: center
     }
 </style>
 <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
@@ -16,66 +17,55 @@
         <div class="form-group">
             <div class="col-md-12 text-center">
                 <img src="@(Model.Patient.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="250" height="300" />
-                @Html.HiddenFor(m=>m.ConsultingId)
+                @Html.HiddenFor(m => m.ConsultingId)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Patient.FullName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
+            <div class="col-md-2 control-label">
+                <label>Tên Bệnh Nhân</label>
+            </div>
+            <div class="col-md-8">
                 @Html.TextBoxFor(m => m.Patient.FullName, new { @class = "form-control", @readonly = "" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.StartConsulting, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
+            <div class="col-md-2 control-label">
+                <label>Thời gian tư vấn</label>
+            </div>
+            <div class="col-md-8">
                 <input type="text" class="form-control" value="@Model.StartConsulting.ToString("dd/MM/yyyy HH:mm")" readonly />
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.PatientIssue, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
+            <div class="col-md-2 control-label">
+                <label>Vấn đề bệnh nhân</label>
+            </div>
+            <div class="col-md-8">
                 @Html.TextBoxFor(m => m.PatientIssue, new { @class = "form-control", @readonly = "" })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
-            <label class="control-label col-md-2">ContactMedia</label>
-            <div class="col-md-10">
+            <label class="control-label col-md-2">Phương tiện liên lạc</label>
+            <div class="col-md-8">
                 <input type="text" name="ContactMedia" id="ContactMedia" class="form-control" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Contact Result</label>
-            <div class="col-md-10">
-                <input type="text" name="ContactResult" id="ContactResult" class="form-control" />
+            <label class="control-label col-md-2">Kết quả tư vấn</label>
+            <div class="col-md-8">
+	            <textarea rows="6" name="ContactResult" id="ContactResult"class="form-control" ></textarea>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Suggestion</label>
-            <div class="col-md-10">
-                <input type="text" name="Suggestion" id="Suggestion" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Treament Duration</label>
-            <div class="col-md-10">
+            <label class="control-label col-md-2">Số ngày điều trị</label>
+            <div class="col-md-8">
                 <input type="number" name="TreamentDuration" id="TreamentDuration" class="form-control" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Contact Time</label>
-            <div class="col-md-4">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type="text" name="ContactTime" id="ContactTime" readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Next Contact Time</label>
+            <label class="control-label col-md-2">Thời gian liên lạc tiếp theo</label>
             <div class="col-md-4">
                 <div class='input-group date' id='datetimepicker2'>
                     <input type="text" name="NextContactTime" id="NextContactTime" readonly class="form-control" />
@@ -85,39 +75,71 @@
                 </div>
             </div>
         </div>
+        <div class="form-group" style="visibility: hidden">
+            <label class="control-label col-md-2">Gợi ý</label>
+            <div class="col-md-8">
+                <input type="text" name="Suggestion" id="Suggestion" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group" style="visibility: hidden">
+            <label class="control-label col-md-2">Contact Time</label>
+            <div class="col-md-4">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type="text" name="ContactTime" id="ContactTime" value="@DateTime.Now.ToString("dd/MM/yyyy HH:mm")" readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="row">
-        <h2 class="text-center">Sản phẩm khuyến nghị</h2>
+    <div class="row" style="margin:15px">
+        <h2 class="text-center">Sản phẩm khuyến nghị </h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Thêm sản phẩm</button>
+        <div class="pull-right">
+            <label>
+                Tổng tiền:
+            </label>
+            <input type="text" id="totalMoney" readonly class="form-control" />
+            <br />
+        </div>
+
         <table class="table table-striped">
+
             <thead>
                 <tr>
-                    <th style="width:5%"></th>
-                    <th style="width:10%">Image</th>
-                    <th style="width:25%">Thông tin</th>
-                    <th style="text-align:center">Chú thích</th>
+                    <th style="width: 10%">Ảnh</th>
+                    <th style="width: 25%">Thông tin</th>
+                    <th style="width: 15%">Giá</th>
+                    <th style="text-align: center">Chú thích</th>
+                    <th style="width: 5%"></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in products)
-                {
-                    <tr>
-                        <td style="vertical-align:middle;text-align:center">
-                            <input type="checkbox" class="check_product" />
-                            <input type="hidden" value="@item.ProductId" />
-                        </td>
-                        <td> <img src="@(item.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" height="100" alt="" /></td>
-                        <td style="position:relative">
-                            <p style="font-size:22px;font-weight:bold;margin-bottom:35px">@item.ProductName</p>
-                            <div style="position:absolute;bottom:10px;">
-                                <span>Số lượng :</span>
-                                <input style="width:auto;display:inline" type="number" min="1" class="form-control Quantity"  />
-                            </div>
-                        </td>
-                        <td>
-                            <textarea class="form-control Dosage" style="min-height:100px" ></textarea>
-                        </td>
-                    </tr>
-                }
+            <tbody id="mytbody">
+                @*@foreach (var item in products)
+                    {
+                        <tr>
+
+                            <td> <img src="@(item.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" height="100" alt="" /></td>
+                            <td style="position:relative">
+                                <p style="font-size:22px;font-weight:bold;margin-bottom:35px">@item.ProductName</p>
+                                <div style="position:absolute;bottom:10px;">
+                                    <span>Số lượng :</span>
+                                    <input style="width:auto;display:inline" type="number" min="1" class="form-control Quantity" />
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <textarea class="form-control Dosage" style="min-height:100px"></textarea>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger delete_Item">Xóa</button>
+                                <input type="hidden" value="@item.ProductId" />
+                            </td>
+                        </tr>
+                    }*@
 
             </tbody>
         </table>
@@ -126,6 +148,52 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <button id="btn_Save" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content  ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Danh sách sản phẩm</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Ảnh</th>
+                                <th style="width:30%">Tên sản phẩm</th>
+                                <th style="width:20%">Giá niêm yết</th>
+                                <th style="width:20%">Giá giảm</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in products)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@(item.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" height="100" alt="" />
+                                    </td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.OriginPrice</td>
+                                    <td>@item.SalePrice</td>
+                                    <td>
+                                        <button class="btn btn-success add_product">Thêm</button>
+                                        <input type="hidden" value="@item.ProductId" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

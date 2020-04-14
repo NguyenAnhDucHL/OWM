@@ -10,6 +10,7 @@ using OMW_Project.Models;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
+    [Authorize(Roles = "Admin,WebManager")]
     public class CategoryProductAdminController : Controller
     {
         private ProjectDbContext db = new ProjectDbContext();

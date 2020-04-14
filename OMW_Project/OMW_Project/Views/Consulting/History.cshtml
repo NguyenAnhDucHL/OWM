@@ -16,17 +16,21 @@
         <div class="row">
             <div class="col-xl-12 mx-auto">
                 <div class="cta-inner rounded">
-
-                    <!-- Main -->
                     <div class="container">
                         @foreach (var item in Model)
                         {
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Thời gian: <b>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</b></label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Bác sĩ: <b>@item.Doctor.FullName</b></label>
+                                </div>
+                                <div class="col-md-4">
+                                    @if (item.HasResult)
+                                    {
+                                        <a href="@Url.Action("ViewResult","Consulting",new { consultingId = item.ConsultingId})" class="btn btn-info  float-right">Xem kết quả</a>
+                                    }
                                 </div>
                             </div>
                             <div class="row">

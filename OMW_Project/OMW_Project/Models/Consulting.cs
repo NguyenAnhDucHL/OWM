@@ -29,5 +29,6 @@ namespace OMW_Project.Models
         [Required]
         public DateTime StartConsulting { get; set; }
         public bool Status { get; set; }
+        public bool HasResult { get; set; }
     }
 }

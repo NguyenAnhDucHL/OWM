@@ -1,0 +1,84 @@
+﻿@model OMW_Project.Models.Consulting
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Sửa lịch tư vấn</h2>
+<link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ConsultingId)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.PatientIssue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientIssue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientIssue, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                <label>Tên bác sĩ</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Doctor.FullName, new { @class = "form-control", @readonly = "readonly" })
+                @Html.HiddenFor(m => m.DoctorId);
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                <label>Thời gian tư vấn</label>
+            </div>
+            <div class="col-md-4">
+                <div class='input-group date' id='datetimepicker1'>
+                    @*<input class="form-control"  id="StartConsulting" name="StartConsulting" type="text"value="dsdsdf" >*@
+                    <input type="hidden" value="@Model.StartConsulting.ToString("dd/MM/yyyy HH:mm")" />
+                    @Html.TextBoxFor(model => model.StartConsulting, new { @class = "form-control", @readonly = ""})
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+                @Html.ValidationMessageFor(model => model.StartConsulting, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sửa" class="btn btn-info" />
+                <a class="btn btn-default" href="@Url.Action("Index", "ConsultingAdmin")">Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY   HH:mm',
+            stepping: 5,
+            ignoreReadonly:true
+        });
+
+    </script>
+}

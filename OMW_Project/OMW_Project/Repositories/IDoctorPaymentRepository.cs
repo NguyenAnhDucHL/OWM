@@ -13,5 +13,6 @@ namespace OMW_Project.Repositories
         void Add(DoctorPayment doctorPayment);
         void Update(DoctorPayment doctorPayment);
         IList<DoctorPayment> GetAll();
+        IList<DoctorPayment> GetAllDoctorId(string doctorId);
     }
 }

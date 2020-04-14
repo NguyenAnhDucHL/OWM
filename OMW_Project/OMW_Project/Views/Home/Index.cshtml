@@ -1,4 +1,11 @@
-﻿@model IEnumerable<OMW_Project.Models.Post>
+﻿<style>
+	a:hover img {
+		transform: scale(1.5);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	}
+</style>
+@using OMW_Project.SupportClass
+@model IEnumerable<OMW_Project.Models.Post>
 @*<section class="page-section clearfix">
 		<div class="container">
 			<div class="intro">
@@ -23,56 +30,83 @@
 	<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
 		<div style="width:100%">
 			<div class="col">
-
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">
+					Giỏ hàng (<span class="total-count"></span>)
+				</button>
+				<button class="clear-cart btn btn-danger ">Xóa Giỏ hàng</button>
 				@Html.Partial("_PartialLoginButton")
 			</div>
 		</div>
 	</nav>
 }
 
+<ul class="slides">
+	<input type="radio" name="radio-btn" id="img-1" checked />
+	<li class="slide-container">
+		<div class="slide">
+			<img src="https://vuonghy.com/wp-content/uploads/2020/03/Untitled-1-1.jpg" />
+		</div>
+		<div class="nav">
+			<label for="img-3" class="prev">&#x2039;</label>
+			<label for="img-2" class="next">&#x203a;</label>
+		</div>
+	</li>
+
+	<input type="radio" name="radio-btn" id="img-2" />
+	<li class="slide-container">
+		<div class="slide">
+			<img src="http://yhoccotruyennamhoang.com/images/slider/dong-y-nam-hoang-banner-2.jpg" />
+		</div>
+		<div class="nav">
+			<label for="img-1" class="prev">&#x2039;</label>
+			<label for="img-3" class="next">&#x203a;</label>
+		</div>
+	</li>
+
+	<input type="radio" name="radio-btn" id="img-3" />
+	<li class="slide-container">
+		<div class="slide">
+			<img src="https://maplelifevn.com/wp-content/uploads/2018/09/bai-thuoc-manh-loc-truong-xuan-tri-suy-giam-sinh-ly-nam.png" />
+		</div>
+		<div class="nav">
+			<label for="img-2" class="prev">&#x2039;</label>
+			<label for="img-1" class="next">&#x203a;</label>
+		</div>
+	</li>
+
+	<li class="nav-dots">
+		<label for="img-1" class="nav-dot" id="img-dot-1"></label>
+		<label for="img-2" class="nav-dot" id="img-dot-2"></label>
+		<label for="img-3" class="nav-dot" id="img-dot-3"></label>
+	</li>
+</ul>
 <section class="page-section cta">
-	<ul class="slides">
-		<input type="radio" name="radio-btn" id="img-1" checked />
-		<li class="slide-container">
-			<div class="slide">
-				<img src="https://vuonghy.com/wp-content/uploads/2020/03/Untitled-1-1.jpg" />
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="banner" style="margin-bottom:30px">
+				<p style="color: white">Một số sản phẩm chính</p>
 			</div>
-			<div class="nav">
-				<label for="img-3" class="prev">&#x2039;</label>
-				<label for="img-2" class="next">&#x203a;</label>
+			<div class="row text-center" style="margin-left:5px">
+				@foreach (var item in ViewBag.lstProducts)
+				{
+					<div class="col-md-3">
+						<div class="card justify-content-around" style="width: 15rem;height: 400px">
+							<a href="@Url.Action("Detail", "Product", new {productId = item.ProductId})">
+								<img class="card-img-top" src="@item.Image"
+									 alt="Card image cap">
+							</a>
+							<div class="card-block">
+								<p class="card-title">@item.ProductName</p>
+								<h6 class="card-text">Giá tiền: @String.Format("{0:0,0 ₫}", item.SalePrice)</h6>
+							</div>
+						</div>
+						<br />
+					</div>
+				}
 			</div>
-		</li>
-
-		<input type="radio" name="radio-btn" id="img-2" />
-		<li class="slide-container">
-			<div class="slide">
-				<img src="http://yhoccotruyennamhoang.com/images/slider/dong-y-nam-hoang-banner-2.jpg" />
-			</div>
-			<div class="nav">
-				<label for="img-1" class="prev">&#x2039;</label>
-				<label for="img-3" class="next">&#x203a;</label>
-			</div>
-		</li>
-
-		<input type="radio" name="radio-btn" id="img-3" />
-		<li class="slide-container">
-			<div class="slide">
-				<img src="https://maplelifevn.com/wp-content/uploads/2018/09/bai-thuoc-manh-loc-truong-xuan-tri-suy-giam-sinh-ly-nam.png" />
-			</div>
-			<div class="nav">
-				<label for="img-2" class="prev">&#x2039;</label>
-				<label for="img-1" class="next">&#x203a;</label>
-			</div>
-		</li>
-
-		<li class="nav-dots">
-			<label for="img-1" class="nav-dot" id="img-dot-1"></label>
-			<label for="img-2" class="nav-dot" id="img-dot-2"></label>
-			<label for="img-3" class="nav-dot" id="img-dot-3"></label>
-		</li>
-	</ul>
+		</div>
+	</div>
 </section>
-
 <!--post-->
 <section class="page-section cta">
 	<div class="container">
@@ -81,13 +115,32 @@
 				<div class="cta-inner rounded">
 					@foreach (var item in Model)
 					{
-						<h1>@item.Title</h1>
-						@Html.Raw(item.Description)
-						<hr />
+						<div class="row">
+							<div class="col-4"><img src="@item.Image" class="img-fluid" /></div>
+							<div class="col-8">
+								<h2><a href="@Url.Action("PostDetail", "Home", new {@id = item.PostId})" style="color: black" target="_blank">@item.Title</a></h2>
+
+								@if (item.Description.Length > 300)
+								{
+									<div>@Html.Raw(item.Description.Substring(0, 300) + " ...")</div>
+								}
+								else
+								{
+									<div>
+										@Html.Raw(item.Description)
+									</div>
+
+								}
+								@*<div>@HtmlUtility.PostDescription(@Html.Raw(item.Description).ToString(), 300)</div>*@
+								<div class="col-2  offset-10"><a href="@Url.Action("PostDetail", "Home", new {@id = item.PostId})"> Chi Tiết </a></div>
+							</div>
+						</div>
 					}
 				</div>
 			</div>
 		</div>
+	</div>
+
 	</div>
 </section>
 
@@ -106,3 +159,4 @@
 		</div>
 	</div>
 </section>
+

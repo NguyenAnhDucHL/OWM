@@ -22,6 +22,20 @@ namespace OMW_Project.SupportClass
             return returnActive ? "active" : "";
         }
 
+        public static string PostDescription(string content, int length)
+        {
+            var tmp = content;
+            if (content.Length > length)
+            {
+                content = content.Substring(0, length);
+                if (tmp[length] != ' ')
+                {
+                    content = content.Substring(0, content.LastIndexOf(' '));
+                    content = content.Trim() + "...";
+                }
+            }
 
+            return content;
+        }
     }
 }

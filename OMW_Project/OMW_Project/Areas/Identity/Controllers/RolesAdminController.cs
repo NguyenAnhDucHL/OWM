@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,WebManager")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

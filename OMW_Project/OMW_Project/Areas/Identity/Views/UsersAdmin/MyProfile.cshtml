@@ -4,13 +4,13 @@
     ViewBag.Title = "Profile";
 }
 <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
-<h2>Profile</h2>
+<h2>Đặt lịch</h2>
 
 <div class="container">
     <form class="form-horizontal">
-        @Html.HiddenFor(m => m.Id, new { @class = "form-control", @readonly = "readonly",id="UserId" })
+        @Html.HiddenFor(m => m.Id, new { @class = "form-control", @readonly = "readonly", id = "UserId" })
 
-        <div class="form-group">
+        @*<div class="form-group">
             <label class="col-md-2 control-label" for="email">Hình đại diện:</label>
             <div class="col-md-10">
                 <img src="@(Model.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="200" height="300" style="margin:0 auto" alt="" />
@@ -45,13 +45,13 @@
             <div class="col-md-10">
                 @Html.TextBox("Sex", Model.Sex ? "Male" : "Female", new { @class = "form-control", @readonly = "readonly" })
             </div>
-        </div>
+        </div>*@
         @if (User.IsInRole("Doctor"))
         {
             var docprofile = ViewBag.docProfile as DoctorProfile;
             var listConsulting = ViewBag.consulting as List<Consulting>;
 
-            <h1 class="text-center">Thông tin bác sĩ</h1>
+            @*<h1 class="text-center">Thông tin bác sĩ</h1>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="email">CMT:</label>
                 <div class="col-md-10">
@@ -75,7 +75,7 @@
                 <div class="col-md-10">
                     @Html.TextBox("Experiences", docprofile.Experience, new { @class = "form-control", @readonly = "readonly" })
                 </div>
-            </div>
+            </div>*@
             <h1 class="text-center">Lịch Hẹn</h1>
             if (listConsulting == null || listConsulting.Count == 0)
             {
@@ -91,19 +91,31 @@
                 <table class="table table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th style="width:25%">Thời gian</th>
-                            <th style="width:60%">Ghi chú</th>
+                            <th style="width:5%">Thời gian</th>
+                            <th>Tên bệnh nhân</th>
+                            <th>Số điện thoại</th>
+                            <th style="width:60%">Vấn đề bệnh nhân</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in listConsulting)
                         {
-                            <tr>
-                                <td><p>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</p> </td>
-                                <td><p>@item.PatientIssue</p></td>
-                                <td><button type="button" class="btn btn-sm btn-@(item.Status?"success":"warning")">@(item.Status ? "Booked" : "Not Booked")</button></td>
-                            </tr>
+                        <tr>
+                            <td><p>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</p> </td>
+                            @if (item.Patient != null)
+                            {
+                                <td><p>@item.Patient.FullName</p></td>
+                                <td><p>@item.Patient.PhoneNumber</p></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                            <td><p>@item.PatientIssue</p></td>
+                            <td><button type="button" class="btn btn-sm btn-@(item.Status?"success":"warning")">@(item.Status ? "Booked" : "Not Booked")</button></td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -124,7 +136,7 @@
         </div>
         <div class="form-group text-center">
             <button type="button" id="addConsulting" class="btn btn-primary ">
-                Lưu
+                Thêm lịch rảnh
             </button>
         </div>
     </form>
@@ -148,7 +160,7 @@
                     url: "/Consultings/AddConsultingByDoc",
                     data: {
                         StartConsulting: time,
-                        DoctorId:$("#UserId").val()
+                        DoctorId: $("#UserId").val()
                     },
                     dataType: "json",
                     success: function (response) {

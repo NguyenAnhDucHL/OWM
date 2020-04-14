@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
+    [Authorize]
     public class PostsAdminController : Controller
     {
         private IPostRepository _postRepository;
@@ -17,7 +18,10 @@ namespace OMW_Project.Areas.Identity.Controllers
             _postRepository = new PostRepository();
             _categoryPostRepository = new CategoryPostRepository();
         }
-
+        public ActionResult Home()
+        {
+            return View();
+        }
         // GET: Identity/Posts
         public ActionResult Index()
         {
@@ -68,7 +72,7 @@ namespace OMW_Project.Areas.Identity.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Post post)
+        public ActionResult Create(Post post)
         {
             if (post.myfile != null && post.myfile.ContentLength > 0)
             {
@@ -116,7 +120,7 @@ namespace OMW_Project.Areas.Identity.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Post post)
+        public ActionResult Edit(Post post)
         {
             if (post.myfile != null && post.myfile.ContentLength > 0)
             {

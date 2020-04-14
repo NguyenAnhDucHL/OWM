@@ -1,0 +1,43 @@
+﻿@model IEnumerable<OMW_Project.Models.DoctorPayment>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Tổng tiền hoa hồng: @String.Format("{0:0,0 ₫}", ViewBag.TotalPaid)</h2>
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+	<div class="row">
+		<div class="col-sm-12">
+			<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<thead>
+					<tr>
+						<th>DoctorPayemt Id</th>
+						<th>Tiền hoa hồng</th>
+						<th>Trạng thái</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr role="row" class="odd">
+							<td class="sorting_1">
+								<a href="@Url.Action("Details", "DoctorPayment", new { id = item.DoctorPaymentId })">@item.DoctorPaymentId</a>
+							</td>
+							<td>@String.Format("{0:0,0 ₫}", item.TotalPaid)</td>
+							<td>@Html.DisplayFor(modelItem => item.Status)</td>
+						</tr>
+					}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+</div>
+@section scripts{
+	<script>
+		$('#example1').DataTable();
+
+	</script>
+}

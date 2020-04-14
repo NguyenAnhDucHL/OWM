@@ -25,35 +25,54 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
-            ConsultResult
-            <li>
-                <a href="@Url.Action("Index","ConsultResult")">
-                    <i class="fa fa-folder"></i> Trả kết quả bệnh nhân
-                </a>
-            </li>
+            @*ConsultResult*@
+            @if (User.IsInRole("Doctor"))
+            {
+                <li>
+                    <a href="@Url.Action("Index","ConsultResult")">
+                        <i class="fa fa-folder"></i> Trả kết quả bệnh nhân
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","PostsDoctor")">
+                        <i class="fa fa-folder"></i> Bài viết
+                    </a>
+                </li>
+	            <li>
+		            <a href="@Url.Action("MyProfile","UsersAdmin")">
+			            <i class="fa fa-folder"></i> Đặt lịch
+		            </a>
+	            </li>
+	            <li>
+		            <a href="@Url.Action("Index","DoctorPayment")">
+			            <i class="fa fa-folder"></i> Tiền hoa hồng
+		            </a>
+	            </li>
+
+            }
             @if (User.IsInRole("Admin"))
             {
-                <li class ="@Url.IsActive("Index", "RolesAdmin")">
+                <li class="@Url.IsActive("Index", "RolesAdmin")">
                     <a href="@Url.Action("Index","RolesAdmin")">
                         <i class="fa fa-folder"></i> Vai trò người dùng
                     </a>
                 </li>
-                <li class ="@Url.IsActive("Index", "UsersAdmin")">
+                <li class="@Url.IsActive("Index", "UsersAdmin")">
                     <a href="@Url.Action("Index","UsersAdmin")">
                         <i class="fa fa-folder"></i> Người dùng
                     </a>
                 </li>
-                <li class ="@Url.IsActive("Index", "DoctorProfile")">
+                <li class="@Url.IsActive("Index", "DoctorProfile")">
                     <a href="@Url.Action("Index","DoctorProfile")">
                         <i class="fa fa-folder"></i> Bác sĩ
                     </a>
                 </li>
-                <li class ="@Url.IsActive("Index", "Consultings")">
-                    <a href="@Url.Action("Index","Consultings")">
+                <li class="@Url.IsActive("Index", "ConsultingAdmin")">
+                    <a href="@Url.Action("Index","ConsultingAdmin")">
                         <i class="fa fa-folder"></i> Lịch tư vấn
                     </a>
                 </li>
-                <li class="treeview @Url.IsActive("NotMetYet", "Consultings") @Url.IsActive("MetAndMeeting", "Consultings") ">
+                <li class="treeview @Url.IsActive("NotMetYet", "ConsultingAdmin") @Url.IsActive("MetAndMeeting", "ConsultingAdmin") ">
                     <a href="#">
                         <i class="fa fa-folder"></i> Tư vấn
                         <span class="pull-right-container">
@@ -61,16 +80,41 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="@Url.IsActive("NotMetYet", "Consultings")"><a href="@Url.Action("NotMetYet","Consultings")"><i class="fa fa-stack-overflow"></i>Danh sách chưa được tư vấn</a></li>
-                        <li class="@Url.IsActive("MetAndMeeting", "Consultings")"><a href="@Url.Action("MetAndMeeting","Consultings")"><i class="fa  fa-sitemap"></i>Danh sách đã tư vấn</a></li>
+                        <li class="@Url.IsActive("NotMetYet", "ConsultingAdmin")"><a href="@Url.Action("NotMetYet","ConsultingAdmin")"><i class="fa fa-stack-overflow"></i>Danh sách chưa được tư vấn</a></li>
+                        <li class="@Url.IsActive("MetAndMeeting", "ConsultingAdmin")"><a href="@Url.Action("MetAndMeeting","ConsultingAdmin")"><i class="fa  fa-sitemap"></i>Danh sách đã tư vấn</a></li>
                     </ul>
                 </li>
-                <li class="@Url.IsActive("Index", "OrderAdmin")">
-                    <a href="@Url.Action("Index","OrderAdmin")">
-                        <i class="fa fa-folder"></i>Danh sách Đặt hàng
+                <li class="treeview @Url.IsActive("Index", "OrderAdmin")">
+                    <a href="#">
+                        <i class="fa fa-folder"></i> Đơn hàng
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li class="@Url.IsActive("Index", "OrderAdmin")">
+                            <a href="@Url.Action("Index", "OrderAdmin")">
+                                <i class="fa fa-stack-overflow"></i>Danh sách đơn hàng
+                            </a>
+                        </li>
+                        <li class="@Url.IsActive("NoProcessed", "OrderAdmin")">
+                            <a href="@Url.Action("NoProcessed", "OrderAdmin")">
+                                <i class="fa fa-stack-overflow"></i>Đơn hàng chưa sử lý
+                            </a>
+                        </li>
+	                    <li class="@Url.IsActive("Processed", "OrderAdmin")">
+		                    <a href="@Url.Action("Processed", "OrderAdmin")">
+			                    <i class="fa  fa-sitemap"></i>Đơn hàng đã sử lý
+		                    </a>
+	                    </li>
+	                    <li class="@Url.IsActive("GetAllThisMonth", "OrderAdmin")">
+		                    <a href="@Url.Action("GetAllThisMonth", "OrderAdmin")">
+			                    <i class="fa  fa-sitemap"></i>Đơn hàng trong tháng đã sử lý
+		                    </a>
+	                    </li>
+                    </ul>
                 </li>
-                <li class="@Url.IsActive("Index", "CategoryPostAdmin")">
+	            <li class="@Url.IsActive("Index", "CategoryPostAdmin")">
                     <a href="@Url.Action("Index","CategoryPostAdmin")">
                         <i class="fa fa-folder"></i> Thể loại Bài viết
                     </a>
@@ -82,33 +126,33 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
-	                <ul class="treeview-menu">
-		                <li class="@Url.IsActive("Index", "PostsAdmin")">
-			                <a href="@Url.Action("Index", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Tất cả Bài viết</a>
-		                </li>
-		                <li class="@Url.IsActive("PostApproved", "PostsAdmin")">
-			                <a href="@Url.Action("PostApproved", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Bài viết đã kiểm duyệt</a>
-		                </li>
-		                <li class="@Url.IsActive("PostUnApproved", "PostsAdmin")">
-			                <a href="@Url.Action("PostUnApproved", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Bài viết chưa kiểm duyệt</a>
-		                </li>
-	                </ul>
+                    <ul class="treeview-menu">
+                        <li class="@Url.IsActive("Index", "PostsAdmin")">
+                            <a href="@Url.Action("Index", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Tất cả Bài viết</a>
+                        </li>
+                        <li class="@Url.IsActive("PostApproved", "PostsAdmin")">
+                            <a href="@Url.Action("PostApproved", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Bài viết đã kiểm duyệt</a>
+                        </li>
+                        <li class="@Url.IsActive("PostUnApproved", "PostsAdmin")">
+                            <a href="@Url.Action("PostUnApproved", "PostsAdmin")"><i class="fa  fa-sitemap"></i>Bài viết chưa kiểm duyệt</a>
+                        </li>
+                    </ul>
                 </li>
-                <li class ="@Url.IsActive("Index", "CategoryProductAdmin")">
+                <li class="@Url.IsActive("Index", "CategoryProductAdmin")">
                     <a href="@Url.Action("Index","CategoryProductAdmin")">
                         <i class="fa fa-folder"></i> Thể loại Sản phẩm
                     </a>
                 </li>
-                <li class ="@Url.IsActive("Index", "ProductsAdmin")">
+                <li class="@Url.IsActive("Index", "ProductsAdmin")">
                     <a href="@Url.Action("Index","ProductsAdmin")">
                         <i class="fa fa-folder"></i> Sản phẩm
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-folder"></i> Quảng cáo
-                    </a>
-                </li>
+                @*<li>
+                <a href="#">
+                    <i class="fa fa-folder"></i> Quảng cáo
+                </a>
+            </li>*@
 
             }
 

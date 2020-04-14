@@ -1,0 +1,114 @@
+﻿@model Post
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Tạo bài viết</h2>
+
+
+@using (Html.BeginForm("Create", "PostsDoctor", FormMethod.Post, new { id = "submit", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Image</label>
+
+            <div class="col-md-3">
+                <input type="file" name="myfile" id="myfile" onchange="previewImg(event)">
+            </div>
+            <div class="col-md-7">
+                <img id="imgPreview" width="200" height="300" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Thể loại</label>
+            <div class="col-md-8">
+                @Html.DropDownList("CategoryPostId", ViewBag.CategoryPostId as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryPostId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group" style="visibility: hidden">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo" class="btn btn-success" />
+                <a class="btn btn-default" href="@Url.Action("Index", "PostsDoctor")">Quay lại</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Assets/Vender/bower_components/ckeditor/ckeditor.js"></script>
+    <script>
+        jQuery.validator.addMethod("pattern",
+            function (value, element, param) {
+                debugger
+                return param.test(value);
+            });
+        $(document).ready(function() {
+            $("#submit").validate({
+                rules: {
+                    Title: {
+                        required: true,
+                        minlength: 3
+                    }
+
+                },
+                messages: {
+                    Title: {
+                        required: "Tiêu đề không được để trống",
+                        minlength: "Tiêu đề phải có ít nhất 3 ký tự"
+                    }
+                }
+            });
+        });
+        $(document).ready(function () {
+            CKEDITOR.replace('Description');
+        });
+        var previewImg = function () {
+            var file = event.target.files[0];
+            const name = file.name;
+            const lastDot = name.lastIndexOf('.');
+            const ext = name.substring(lastDot + 1);
+            if (ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'JPG' || ext === 'JPEG' || ext === 'PNG') {
+                var result = document.getElementById("imgPreview")
+                result.src = URL.createObjectURL(file)
+            } else {
+                alert("Sai loại tệp !!")
+            }
+
+        }
+    </script>
+}

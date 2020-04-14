@@ -6,7 +6,7 @@
 
 <h2>Tạo sản phẩm</h2>
 
-@using (Html.BeginForm("Create", "ProductsAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "ProductsAdmin", FormMethod.Post, new { id = "submit", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -85,6 +85,28 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Assets/Vender/bower_components/ckeditor/ckeditor.js"></script>
     <script>
+        jQuery.validator.addMethod("pattern",
+            function (value, element, param) {
+                debugger
+                return param.test(value);
+            });
+        $(document).ready(function () {
+            $("#submit").validate({
+                rules: {
+                    ProductName: {
+                        required: true,
+                        minlength: 3
+                    }
+
+                },
+                messages: {
+                    ProductName: {
+                        required: "Tên sản phẩm không được để trống",
+                        minlength: "Tên sản phẩm phải có ít nhất 3 ký tự"
+                    }
+                }
+            });
+        });
         $(document).ready(function () {
             CKEDITOR.replace('Description');
 

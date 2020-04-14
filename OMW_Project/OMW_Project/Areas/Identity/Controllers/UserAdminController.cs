@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
-    [Authorize(Roles = "Admin,Doctor")]
+    [Authorize(Roles = "Admin,WebManager,Doctor")]
     public class UsersAdminController : Controller
     {
         private ProjectDbContext db = new ProjectDbContext();

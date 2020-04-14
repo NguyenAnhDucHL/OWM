@@ -14,20 +14,27 @@
 					<tr>
 						<th>Order Id</th>
 						<th>Tên Khách hàng</th>
-						<th>Địa chỉ</th>
-						<th>Tổng tiền</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+                        <th>Tổng tiền</th>
+                        <th></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach (var item in Model)
 					{
 					<tr role="row" class="odd">
-						<td class="sorting_1"><a href="@Url.Action("Details","OrderAdmin",new { id=item.OrderId})">@Html.DisplayFor(modelItem => item.UserId)</a></td>
-						<td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
-						<td>@Html.DisplayFor(modelItem => item.Address)</td>
-						<td>
-							@item.TotalCost
-						</td>
+						<td class="sorting_1"><a href="@Url.Action("Details","OrderAdmin",new { id=item.OrderId})">@item.OrderId</a></td>
+						<td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <th>@Html.DisplayFor(modelItem => item.Status)</th>
+                        <td>
+                            @item.TotalCost
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="@Url.Action("Edit", "OrderAdmin", new {id = item.OrderId})">Sửa</a>
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "OrderAdmin", new {id = item.OrderId})">Xóa</a>
+                        </td>
 					</tr>
 					}
 				</tbody>

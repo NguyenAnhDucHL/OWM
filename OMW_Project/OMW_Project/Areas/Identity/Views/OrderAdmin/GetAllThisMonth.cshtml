@@ -1,0 +1,53 @@
+﻿@model IEnumerable<OMW_Project.Models.Order>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Đơn đặt hàng trong tháng đã thanh toán</h2>
+
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+	<div class="row">
+		<div class="col-sm-12">
+			<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<thead>
+				<tr>
+					<th>Order Id</th>
+					<th>Tên Khách hàng</th>
+					<th>Tên Bác sĩ</th>
+					<th>Địa chỉ</th>
+					<th>Trạng thái</th>
+					<th>Tổng tiền</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (var item in Model)
+				{
+					<tr role="row" class="odd">
+						<td class="sorting_1"><a href="@Url.Action("Details","OrderAdmin",new { id=item.OrderId})">@item.OrderId</a></td>
+						<td>@Html.DisplayFor(modelItem => item.FullName)</td>
+						<td>@Html.DisplayFor(modelItem => item.Doctor.FullName)</td>
+						<td>@Html.DisplayFor(modelItem => item.Address)</td>
+						<th>@Html.DisplayFor(modelItem => item.Status)</th>
+						<td>
+							@item.TotalCost
+						</td>
+					</tr>
+				}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+</div>
+@section scripts{
+	<script>
+		$('#example1').DataTable();
+
+	</script>
+}
+
+
+
+

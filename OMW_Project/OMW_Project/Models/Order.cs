@@ -22,7 +22,8 @@ namespace OMW_Project.Models
         public string Address { get; set; }
         public double TotalCost { get; set; }
         public bool Status { get; set; }
-
+        public DateTime OrderTime { get; set; } = DateTime.Now;
+        
         [ForeignKey("Doctor")]
         public string DoctorId { get; set; }
         public User Doctor { get; set; }

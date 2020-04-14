@@ -13,7 +13,7 @@ using OMW_Project.Repositories;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,WebManager")]
     public class DoctorProfileController : Controller
     {
         private ProjectDbContext db = new ProjectDbContext();

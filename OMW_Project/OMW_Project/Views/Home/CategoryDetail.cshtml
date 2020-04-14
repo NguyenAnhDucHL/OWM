@@ -1,37 +1,48 @@
 ﻿@{
-    ViewBag.Title = "CategoryDetail";
-    Layout = "~/Views/Shared/_LayoutNew.cshtml";
-    List<Post> lstCategory = ViewBag.getCategoryDetail;
+	ViewBag.Title = "Bài viết";
+	Layout = "~/Views/Shared/_LayoutNew.cshtml";
+	List<Post> lstCategory = ViewBag.getCategoryDetail;
 }
 
 
 <section class="page-section cta">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12 mx-auto">
-                <h1 class="card-text text-center">CategoryDetail</h1>
-                <div class="cta-inner rounded">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 mx-auto">
+				<h1 class="card-text text-center">@ViewBag.CategoryName</h1>
+				<div class="cta-inner rounded">
 
-                    <div class="container">
-                        <div class="row">
-                            @foreach (var item in lstCategory)
-                            {
-	                            <div class="row">
-		                            <div class="col-4"><img src="@item.Image" class="img-fluid"/></div>
-		                            <div class="col-8">
-			                            <h3>@item.Title</h3>
-			                            <div>@Html.Raw(item.Description.Substring(0, 300) + " ...")</div>
-			                            <div class="col-2 offset-10"><a href="@Url.Action("PostDetail","Home",new { @id = item.PostId})">Chi Tiết</a></div>
-		                            </div>
-	                            </div>
-	                            <br/>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="container">
+						<div class="row">
+							@foreach (var item in lstCategory)
+							{
+								<div class="row">
+									<div class="col-4"><img src="@item.Image" class="img-fluid" /></div>
+									<div class="col-8">
+										<h3><a href="@Url.Action("PostDetail","Home",new { @id = item.PostId})" style="color: black">@item.Title</a></h3>
+										@if (item.Description.Length > 300)
+										{
+											<div>@Html.Raw(item.Description.Substring(0, 300) + " ...")</div>
+										}
+										else
+										{
+											<div>Html.Raw(item.Description)</div>
+										}
+
+										<div class="col-2 offset-10">
+											<a href="@Url.Action("PostDetail", "Home", new {@id = item.PostId})">Chi Tiết</a>
+										</div>
+									</div>
+								</div>
+								<br />
+							}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 

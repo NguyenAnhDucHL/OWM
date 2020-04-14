@@ -46,22 +46,21 @@
                                         <label>@subitem.Quantity</label>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>@subitem.UnitCost</label>
+                                        <label>@String.Format("{0:0,0 ₫}", subitem.UnitCost)</label>
                                     </div>
                                     <div class="col-md-2 text-right">
-                                        <label>@subitem.TotalCost</label>
+                                        <label>@String.Format("{0:0,0 ₫}", subitem.TotalCost)</label>
                                     </div>
                                 </div>
                             }
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <label>Trạng thái: <b>@item.Status</b></label>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <label>Tổng tiền: <b>@item.TotalCost</b></label>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Trạng thái: <b>@(item.Status?"Đã giao hàng":"Đang giao hàng")</b></label>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <label>Tổng tiền: <b>@String.Format("{0:0,0 ₫}", item.TotalCost)</b></label>
+                        </div>
+                    </div>
                             <hr />
                         }
 

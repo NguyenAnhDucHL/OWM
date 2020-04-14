@@ -15,7 +15,8 @@ namespace OMW_Project.Models
         [Key]
         public string CategoryPostId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Thể loại bài viết không được để trống")]
+        [MinLength(3,ErrorMessage = "Thể loại bài viết phải có ít nhất 3 ký tự")]
         [Display(Name = "Thể loại bài viết")]
         public string CategoryName { get; set; }
 

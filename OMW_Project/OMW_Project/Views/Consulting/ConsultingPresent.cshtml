@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Consulting>
+@{
+    ViewBag.Title = "ConsultingPresent";
+}
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner rounded">
+                    <div class="container">
+                        <!-- Main -->
+                        <table class="col-md-12 table table-bordered table-striped dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tên bác sĩ</th>
+                                    <th>Vấn đề của bạn</th>
+                                    <th>Thời gian tư vấn</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Doctor.FullName</td>
+                                        <td>@item.PatientIssue</td>
+                                        <td>@item.StartConsulting.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td> <a class="btn btn-info" href="@Url.Action("EditConsulting", "Consulting", new {id = item.ConsultingId})">Sửa</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        $('#example1').DataTable();
+
+    </script>
+}

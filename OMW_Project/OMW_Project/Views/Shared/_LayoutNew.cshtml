@@ -1,44 +1,120 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đông Phương Y Học</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link href="/Assets/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Đông Phương Y Học</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+	<!-- Custom fonts for this template -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/Assets/css/business-casual.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="/Assets/css/business-casual.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="site-heading text-center text-white d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">Sống Thời Vận, Chết Số</span>
-        <span class="site-heading-lower">Đông Phương Y Học</span>
-    </h1>
-    @Html.Partial("_Header")
-    @RenderSection("NavBar", required: false)
+	<h1 class="site-heading text-center text-white d-none d-lg-block">
+		<span class="site-heading-upper text-primary mb-3">Sống Thời Vận, Chết Số</span>
+		<span class="site-heading-lower">Đông Phương Y Học</span>
+	</h1>
+	@Html.Partial("_Header")
+	@RenderSection("NavBar", required: false)
 
 
-    @RenderBody()
+	@RenderBody()
 
-    <footer class="footer text-faded text-center py-5">
-        <div class="container">
-            <p class="m-0 small">Copyright &copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </div>
-    </footer>
+	<!-- Modal -->
+	@Html.Partial("_CartModel")
 
-    @Scripts.Render("~/bundles/jquery")
-    <script src="~/Assets/vendor/bootstrap/js/popper.min.js"></script>
+	<footer class="col-12 footer text-faded text-center py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 text-left">
+					<h5>Đông Phương Y Học</h5>
+					<hr style="background-color: white; height:2px;" />
+					<ul style="list-style-type:none;">
+						<li><strong style="color: wheat;">Giờ mở cửa</strong> : Thứ 2 - Thứ 6	8AM–5PM</li>
+						<li><strong style="color: wheat;">Hotline</strong> : 024 7300 1866</li>
+						<li><strong style="color: wheat;">Tư vấn sản phẩm</strong> : 0969.0969.87</li>
+						<li><strong style="color: wheat;">Founder</strong> : Lê Thanh Hải</li>
+					</ul>
+				</div>
 
-    @Scripts.Render("~/bundles/bootstrap")
-    <script src="/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("scripts", required: false)
+				<div class="col-md-3 text-left">
+					<h5>Hướng Dẫn Mua Hàng</h5>
+					<hr style="background-color: white; height:2px;" />
+					<ul style="list-style-type:none;">
+						<li><strong style="color: wheat;">Trụ sở</strong> : Khu GD&ĐT, Khu CNC, KM29, ĐCT08, Hòa Lạc, Thạch Thất, Hà Nội 155300</li>
+						<li><strong style="color: wheat;">Giờ mở cửa</strong> : Thứ 2 - Thứ 6	8AM–5PM</li>
+						<li><strong style="color: wheat;">Hotline</strong> : 024 7300 1866</li>
+						<li><strong style="color: wheat;">Tư vấn sản phẩm</strong> : 0969.0969.87</li>
+						<li><strong style="color: wheat;">Founder</strong> : Lê Thanh Hải</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 text-left">
+					<h5>Đông Phương Y Học</h5>
+					<hr style="background-color: white; height:2px;" />
+					<ul style="list-style-type:none;">
+						<li><strong style="color: wheat;">Trụ sở</strong> : Khu GD&ĐT, Khu CNC, KM29, ĐCT08, Hòa Lạc, Thạch Thất, Hà Nội 155300</li>
+						<li><strong style="color: wheat;">Giờ mở cửa</strong> : Thứ 2 - Thứ 6	8AM–5PM</li>
+						<li><strong style="color: wheat;">Hotline</strong> : 024 7300 1866</li>
+						<li><strong style="color: wheat;">Tư vấn sản phẩm</strong> : 0969.0969.87</li>
+						<li><strong style="color: wheat;">Founder</strong> : Lê Thanh Hải</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 text-left">
+					<h5>Map Đông Phương Y Học</h5>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14897.929322179012!2d105.5272863!3d21.0133783!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa3c62e29d8ab37e4!2sFPT%20University!5e0!3m2!1sen!2s!4v1586762971109!5m2!1sen!2s" width="176" height="163" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+				</div>
+
+
+			</div>
+			<br />
+		</div>
+		@*<div style="margin: 50px; background-color: black; width: inherit">
+				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+					 width="100" height="100"
+					 viewBox="0 0 172 172"
+					 style=" fill:#000000;">
+					<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+						<path d="M0,172v-172h172v172z" fill="none"></path>
+						<g fill="#333333">
+							<path d="M17.2,24.08c-9.48687,0 -17.2,7.71313 -17.2,17.2v89.44c0,9.48688 7.71313,17.2 17.2,17.2h137.6c9.48688,0 17.2,-7.71312 17.2,-17.2v-89.44c0,-9.48687 -7.71312,-17.2 -17.2,-17.2zM102.125,66.7575c4.68969,0 9.5675,1.935 9.5675,1.935l-1.72,8.385c0,0 -3.70875,-2.4725 -6.9875,-2.4725c-5.0525,0 -6.88,1.65281 -6.88,3.87c0,4.34031 14.0825,5.10625 14.0825,14.835c0,8.08938 -10.03781,13.6525 -17.3075,13.6525c-7.26969,0 -11.0725,-2.15 -11.0725,-2.15l1.8275,-8.17c0,0 3.80281,2.2575 9.675,2.2575c5.85875,0 6.665,-2.49937 6.665,-3.5475c0,-6.20812 -13.975,-4.47469 -13.975,-16.555c0,-6.67844 5.45563,-12.04 16.125,-12.04zM56.6525,67.51h10.8575l-15.48,38.27h-11.18l-8.17,-30.96c0,0 8.58656,4.38063 13.8675,16.2325c0.22844,1.43781 0.86,3.7625 0.86,3.7625zM71.4875,67.51h10.32l-6.1275,38.27h-10.2125zM126.635,67.51h10.6425l7.8475,38.27h-9.245l-1.075,-5.4825h-12.685l-2.0425,5.4825h-10.105zM21.5,67.6175h15.695c4.00438,0 5.4825,3.7625 5.4825,3.7625l3.44,17.415c-4.64937,-14.99625 -24.6175,-21.1775 -24.6175,-21.1775zM130.505,78.5825l-5.59,14.405h8.385z">
+							</path>
+						</g>
+					</g>
+				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+					 width="100" height="100"
+					 viewBox="0 0 172 172"
+					 style=" fill:#000000;">
+					<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+						<path d="M0,172v-172h172v172z" fill="none"></path>
+						<g fill="#333333">
+							<path d="M17.2,24.08c-9.46,0 -17.2,7.74 -17.2,17.2v89.44c0,9.46 7.74,17.2 17.2,17.2h137.6c9.46,0 17.2,-7.74 17.2,-17.2v-89.44c0,-9.46 -7.74,-17.2 -17.2,-17.2zM17.2,30.96h137.6c5.73781,0 10.32,4.58219 10.32,10.32v89.44c0,5.73781 -4.58219,10.32 -10.32,10.32h-137.6c-5.73781,0 -10.32,-4.58219 -10.32,-10.32v-89.44c0,-5.73781 4.58219,-10.32 10.32,-10.32zM58.48,44.72c-22.76312,0 -41.28,18.51688 -41.28,41.28c0,22.76313 18.51688,41.28 41.28,41.28c10.58875,0 20.21,-4.07156 27.52,-10.6425c7.31,6.57094 16.94469,10.6425 27.52,10.6425c22.76313,0 41.28,-18.51687 41.28,-41.28c0,-22.76312 -18.51687,-41.28 -41.28,-41.28c-10.57531,0 -20.21,4.07156 -27.52,10.6425c-7.31,-6.57094 -16.93125,-10.6425 -27.52,-10.6425zM113.52,51.6c19.04094,0 34.4,15.35906 34.4,34.4c0,19.04094 -15.35906,34.4 -34.4,34.4c-8.77469,0 -16.82375,-3.21156 -22.8975,-8.6c5.68406,-7.08156 9.1375,-16.03094 9.1375,-25.8c0,-9.76906 -3.45344,-18.71844 -9.1375,-25.8c6.07375,-5.38844 14.12281,-8.6 22.8975,-8.6z">
+							</path>
+						</g>
+					</g>
+				</svg>
+			</div>*@
+	</footer>
+
+	@section scripts{
+		<script src="~/Assets/vendor/bootstrap/js/business-casual.js"></script>
+	}
+	@Scripts.Render("~/bundles/jquery")
+	<script src="~/Assets/vendor/bootstrap/js/popper.min.js"></script>
+
+	@Scripts.Render("~/bundles/bootstrap")
+	<script src="/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	@RenderSection("scripts", required: false)
+
+
 
 </body>
 </html>

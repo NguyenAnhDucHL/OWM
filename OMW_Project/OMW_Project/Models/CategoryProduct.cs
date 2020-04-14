@@ -15,7 +15,8 @@ namespace OMW_Project.Models
         [Key]
         public string CategoryProductId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Thể loại sản phẩm không được để trống")]
+        [MinLength(3, ErrorMessage = "Thể loại sản phẩm phải có ít nhất 3 ký tự")]
         [Display(Name = "Thể loại sản phẩm")]
         public string CategoryName { get; set; }
 

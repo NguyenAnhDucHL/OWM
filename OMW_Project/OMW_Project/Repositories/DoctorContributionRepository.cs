@@ -36,5 +36,11 @@ namespace OMW_Project.Repositories
         {
             return db.DoctorContributions.ToList();
         }
+
+        public DoctorContribution FindByDoctorPaymentId(string doctorPaymentId)
+        {
+            return db.DoctorContributions.Include(c => c.DoctorPayment).Include(c => c.Order)
+                .FirstOrDefault(c => c.DoctorPaymentId == doctorPaymentId);
+        }
     }
 }

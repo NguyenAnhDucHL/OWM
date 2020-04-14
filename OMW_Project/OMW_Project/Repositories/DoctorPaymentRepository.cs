@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 using OMW_Project.Models;
 
 namespace OMW_Project.Repositories
@@ -41,6 +42,11 @@ namespace OMW_Project.Repositories
         public IList<DoctorPayment> GetAll()
         {
             return db.DoctorPayments.ToList();
+        }
+
+        public IList<DoctorPayment> GetAllDoctorId(string doctorId)
+        {
+            return db.DoctorPayments.Where(c=>c.DoctorId==doctorId).ToList();
         }
     }
 }

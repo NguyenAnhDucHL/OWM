@@ -42,9 +42,37 @@ namespace OMW_Project.Repositories
             return db.Orders.Include(o=>o.User).ToList();
         }
 
+        public IList<Order> GetAllProcessed()
+        {
+            return db.Orders.Include(o => o.User).Where(c=>c.Status).ToList();
+        }
+
+        public IList<Order> GetAllNoProcessed()
+        {
+            return db.Orders.Include(o => o.User).Where(c => c.Status!=true).ToList();
+        }
+
         public IList<Order> GetHistoryByPatient(string patientId)
         {
             return db.Orders.Include(o => o.OrderProducts.Select(x=>x.Product)).Where(o => o.UserId.Equals(patientId)).ToList();
+        }
+
+        public Order GetOrderByDoctorPaymentId(string patientId)
+        {
+            return null;
+        }
+
+        public void Remove(string oderId)
+        {
+            var order = db.Orders.Find(oderId);
+            db.Orders.Remove(order);
+            db.SaveChanges();
+        }
+
+        public IList<Order> GetAllThisMonth()
+        {
+            var date = DateTime.Now;
+            return db.Orders.Include(c=>c.OrderProducts).Include(c => c.User).Include(c => c.Doctor).Where(c=>c.OrderTime.Year==date.Year && c.OrderTime.Month==date.Month && c.Status==true).ToList();
         }
     }
 }

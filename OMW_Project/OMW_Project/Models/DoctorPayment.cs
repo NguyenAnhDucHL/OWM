@@ -10,6 +10,10 @@ namespace OMW_Project.Models
     public class DoctorPayment
     {
 
+        public DoctorPayment()
+        {
+            DoctorPaymentId = Guid.NewGuid().ToString();
+        }
         [Key]
         public string DoctorPaymentId { get; set; }
 

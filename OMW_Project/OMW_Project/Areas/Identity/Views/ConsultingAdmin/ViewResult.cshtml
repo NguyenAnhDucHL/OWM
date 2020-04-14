@@ -1,0 +1,92 @@
+﻿@model ConsultResult
+@{
+	ViewBag.Title = "ViewResult";
+}
+<style>
+	.row {
+		margin: 20px 0
+	}
+
+		.row label {
+			padding-top: 5px
+		}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-xl-12 mx-auto">
+			<input type="hidden" id="DocId" value="@Model.Consulting.DoctorId" />
+			<!-- Main -->
+			<div class="container" id="addContent">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p>Bác sĩ: @Model.Consulting.Doctor.FullName</p>
+						<img src="@(Model.Consulting.Doctor.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" width="200" height="300" alt="" />
+
+					</div>
+				</div>
+				<div class="row">
+					<label class="col-md-2">Phương tiện liên lạc</label>
+					<div class="col-md-10">
+						@Html.TextBoxFor(m => m.ContactMedia, new { @class = "form-control", @readonly = "" })
+					</div>
+				</div>
+				<div class="row">
+					<label class="col-md-2">Kết quả tư vấn</label>
+					<div class="col-md-10">
+						@Html.TextAreaFor(m => m.ContactResult, new { @class = "form-control", @readonly = "", rows = "6" })
+					</div>
+				</div>
+				<div class="row">
+					<label class="col-md-2">Thời gian điều trị</label>
+					<div class="col-md-10">
+						@Html.TextBoxFor(m => m.TreamentDuration, new { @class = "form-control", @readonly = "" })
+					</div>
+				</div>
+				<div class="row">
+					<label class="col-md-2">Thời gian tư vấn tiếp theo</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" value="@Model.NextContactTime.ToString("dd/MM/yyyy HH:mm")" readonly />
+					</div>
+				</div>
+				<hr />
+				<div class="row ">
+					<h3 style="margin:0 auto">Sản phẩm khuyến nghị</h3>
+				</div>
+				<div class="row">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="width:10%">Ảnh</th>
+								<th style="width:20%">Tên sản phẩm</th>
+								<th style="width:10%">Số lượng</th>
+								<th style="width:10%">Giá </th>
+								<th>Hướng dẫn</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.ProductSuggests)
+							{
+								<tr>
+									<td>
+										<img src="@(item.Product.Image??"/Assets/images/digital-camera-flat-design-icon-vector.jpg")" height="100" alt="" />
+										<input type="hidden" value="@item.ProductId" />
+									</td>
+									<td>@item.Product.ProductName</td>
+									<td>@item.Quantity</td>
+									<td>@item.Product.SalePrice</td>
+									<td>@item.Dosage</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Sửa" class="btn btn-info" />
+						<a class="btn btn-default" href="@Url.Action("MetAndMeeting", "ConsultingAdmin")">Quay lại</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+﻿@model OMW_Project.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div class="container">
+    <hr />
+    @if (@Model.User.Image != null)
+    {
+        <img src="@Model.User.Image" width="200" height="300" alt="" />
+        <hr />
+    }
+
+    <div class="row">
+        <div class="col-md-2"><b>Tên khách hàng</b></div>
+        <div class="col-md-10">@Model.User.FullName</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><b>Email</b></div>
+        <div class="col-md-10">@Model.User.Email</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><b>Địa chỉ</b></div>
+        <div class="col-md-10">@Model.User.Address</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><b>Số điện thoại</b></div>
+        <div class="col-md-10">@Model.User.PhoneNumber</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><b>Giới tính</b></div>
+        <div class="col-md-10">
+            @(Model.User.Sex?"Nam":"Nữ")
+        </div>
+    </div>
+
+    <hr />
+    @if (Model.DoctorId != null)
+    {
+        <dt>
+            Tên bác sĩ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.FullName)
+        </dd>
+    }
+    <div class="row">
+        <div class="col-md-6">
+            <label><b>Tên mặt hàng</b> </label>
+        </div>
+        <div class="col-md-2">
+            <label><b>Số lượng</b> </label>
+        </div>
+        <div class="col-md-2">
+            <label><b>Đơn giá</b> </label>
+        </div>
+        <div class="col-md-2 text-right">
+            <label><b>Thành tiền</b></label>
+        </div>
+    </div>
+    @foreach (var item in Model.OrderProducts)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <p> @item.Product.ProductName</p>
+            </div>
+            <div class="col-md-2">
+                <p>@item.Quantity</p>
+            </div>
+            <div class="col-md-2">
+                <p>@item.UnitCost</p>
+            </div>
+            <div class="col-md-2 text-right">
+                <p>@item.TotalCost</p>
+            </div>
+        </div>
+    }
+    <div class="row">
+
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6 text-right">
+            <label>Tổng tiền: <b>@Model.TotalCost</b></label>
+        </div>
+    </div>
+   
+</div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            <a class="btn btn-default" href="@Url.Action("Index", "OrderAdmin")">Quay lại</a>
+        </div>
+    }

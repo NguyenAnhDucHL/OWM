@@ -37,6 +37,11 @@ namespace OMW_Project.Repositories
             db.SaveChanges();
         }
 
+        public IEnumerable<Product> GetRandomProduct()
+        {
+            var rand = new Random();
+            return db.Products.AsEnumerable().OrderBy(r => rand.Next()).Take(8);
+        }
         public IList<Product> GetAll()
         {
             return db.Products.Include(p => p.CategoryProduct).Include(p => p.User).ToList();

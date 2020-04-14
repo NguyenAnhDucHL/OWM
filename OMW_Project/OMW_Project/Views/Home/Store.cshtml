@@ -1,106 +1,81 @@
 ﻿@using OMW_Project.SupportClass
 @model IEnumerable<Product>
 @{
-	ViewBag.Title = "Store";
+    ViewBag.Title = "Store";
 }
 
 <link href="~/Assets/css/store.css" rel="stylesheet">
 @{
-	var cateList = ViewBag.CateList as List<CategoryProduct>;
+    var cateList = ViewBag.CateList as List<CategoryProduct>;
 }
 
-
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">
+                    Giỏ hàng (<span class="total-count"></span>)
+                </button>
+                <button class="clear-cart btn btn-danger ">Xóa Giỏ hàng</button>
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
 <section class="page-section cta">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xl-9 mx-auto">
-				<div class="cta-inner text-center rounded">
-					<!-- Nav -->
-					@section NavBar{
-						<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
-							<div style="width:100%">
-								<div class="col">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">
-										Giỏ hàng (<span class="total-count"></span>)
-									</button>
-									<button class="clear-cart btn btn-danger ">Xóa Giỏ hàng</button>
-									@Html.Partial("_PartialLoginButton")
-								</div>
-							</div>
-						</nav>
-					}
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Thể loại sản phẩm
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="@Url.Action("Store","Home")">Tất cả sản phẩm</a>
-							@foreach (var cate in cateList)
-							{
-								<a class="dropdown-item" href="@Url.Action("Store", "Home", new {categoryId = cate.CategoryProductId})">@cate.CategoryName</a>
-							}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+                    <!-- Nav -->
 
-						</div>
-					</div>
-					<br />
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Thể loại sản phẩm
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("Store","Home")">Tất cả sản phẩm</a>
+                            @foreach (var cate in cateList)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Store", "Home", new {categoryId = cate.CategoryProductId})">@cate.CategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <br />
 
 					<!-- Main -->
-
 					<div class="container">
 						<div class="row">
-							<div class="banner"><p> Tất cả sản phẩm </p></div>
+							<div style="padding-left:15px"></div>
+							<div class="banner">
+								<p style="color: white">@ViewBag.CategoryName</p>
+							</div>
 							<br />
 							<br />
 							@foreach (var item in Model)
 							{
 								<br />
-								<div class="col">
-									<div class="card" style="width: 20rem;">
+								<div class="col-md-3">
+									<div class="card" style="width: 15rem;height: 380px">
 										<a href="@Url.Action("Detail", "Product", new {productId = item.ProductId})">
 											<img class="card-img-top" src="@item.Image"
 												 alt="Card image cap">
 										</a>
 
 										<div class="card-block">
-											<h5 class="card-title">@item.ProductName</h5>
-											<p class="card-text">Giá tiền: @String.Format("{0:0,0 ₫}", item.SalePrice)</p>
-											<a href="#" data-Id="@item.ProductId" data-name="@item.ProductName" data-price="@item.SalePrice" class="add-to-cart btn btn-primary">
+											<p class="card-title">@item.ProductName</p>
+											<h6 class="card-text">Giá tiền: @String.Format("{0:0,0 ₫}", item.SalePrice)</h6>
+											<a href="#" style="margin-bottom: 0px" data-Id="@item.ProductId" data-name="@item.ProductName" data-price="@item.SalePrice" class="add-to-cart btn btn-primary">
 												Thêm Vào giỏ hàng
 											</a>
 										</div>
 									</div>
 								</div>
 							}
-
+								
 
 						</div>
 					</div>
-
-
-					<!-- Modal -->
-					<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-						 aria-hidden="true">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<table class="show-cart table">
-									</table>
-									<div>Tổng tiền : <span class="total-cart"></span> ₫</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-									<a class="btn btn-primary" href="@Url.Action("Order","Home")">Đặt Hàng</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>
@@ -108,6 +83,6 @@
 </section>
 <!-- Bootstrap core JavaScript -->
 @section scripts{
-	<script src="~/Assets/vendor/bootstrap/js/business-casual.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/business-casual.js"></script>
 }
 

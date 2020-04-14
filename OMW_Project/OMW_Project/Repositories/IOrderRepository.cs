@@ -13,8 +13,12 @@ namespace OMW_Project.Repositories
         void Add(Order order);
         void Update(Order order);
         IList<Order> GetAll();
+        IList<Order> GetAllProcessed(); 
+        IList<Order> GetAllNoProcessed();
         IList<Order> GetHistoryByPatient(string patientId);
+        Order GetOrderByDoctorPaymentId(string patientId);
+        void Remove(string oderId);
+        IList<Order> GetAllThisMonth();
 
-        
     }
 }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OMW_Project.Models.Consulting>
+
+@{
+    ViewBag.Title = "Not Met Yet";
+}
+
+<h2>Danh sách chưa được tư vấn</h2>
+
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tên bác sĩ</th>
+                        <th>Tên bệnh nhân</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr role="row" class="odd">
+                            <td class="sorting_1"><a href="@Url.Action("Details", "ConsultingAdmin", new { id = item.ConsultingId})">@item.ConsultingId</a></td>
+                            <td>@Html.DisplayFor(modelItem => item.Doctor.FullName)</td>
+                            <td>@item.Patient.FullName</td>
+                            <td>
+                                @item.StartConsulting
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td>
+                                <a class="btn btn-info" href="@Url.Action("Edit", "ConsultingAdmin", new {id = item.ConsultingId})">Sửa</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $('#example1').DataTable();
+
+    </script>
+}
+
+

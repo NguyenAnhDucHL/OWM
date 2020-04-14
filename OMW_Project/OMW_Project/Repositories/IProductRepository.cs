@@ -14,6 +14,7 @@ namespace OMW_Project.Repositories
         void Update(Product product);
         void Remove(string productId);
         IList<Product> GetAll();
+        IEnumerable<Product> GetRandomProduct();
         IList<Product> GetByCategory(string categoryId);
     }
 }

@@ -11,6 +11,7 @@ namespace OMW_Project.Repositories
     public interface IConsultResultRepository:IDisposable
     {
         ConsultResult Find(string consultResultId);
+        ConsultResult FindByConsultingId(string consultingtId);
         void Add(ConsultResult consultResult);
         void Update(ConsultResult consultResult);
         IList<ConsultResult> GetAll();

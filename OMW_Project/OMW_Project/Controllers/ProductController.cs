@@ -10,9 +10,11 @@ namespace OMW_Project.Controllers
     public class ProductController : Controller
     {
         private IProductRepository _productRepository;
+        private IPostRepository _postRepository;
         public ProductController()
         {
             _productRepository = new ProductRepository();
+            _postRepository = new PostRepository();
         }
         // GET: Product
         public ActionResult Index()
@@ -21,6 +23,7 @@ namespace OMW_Project.Controllers
         }
         public ActionResult Detail(string productId)
         {
+            ViewBag.lstCatePost = _postRepository.GetPost_Category();
             var product = _productRepository.Find(productId);
             return View(product);
         }

@@ -54,23 +54,28 @@ namespace OMW_Project.Repositories
         public IList<Consulting> GetAllMet()
         {
             var now = DateTime.Now.AddHours(1);
-            return db.Consultings.Include(c => c.Doctor).Where(c => c.Status && c.StartConsulting < now).ToList();
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => c.Status && c.StartConsulting < now).ToList();
         }
 
+        public Consulting CheckUserId(string userId)
+        {
+            var consult = db.Consultings.FirstOrDefault(c => c.PatientId == userId && c.StartConsulting > DateTime.Now);
+            return consult;
+        }
         public IList<Consulting> GetAllNotMet()
         {
             var now = DateTime.Now.AddHours(1);
-            return db.Consultings.Include(c => c.Doctor).Where(c => c.Status && c.StartConsulting > now).ToList();
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => c.Status && c.StartConsulting > now).ToList();
         }
 
         public IList<Consulting> GetAllForBook(string docId)
         {
-            return db.Consultings.Include(c => c.Doctor).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && !c.Status && c.DoctorId.Equals(docId)).ToList();
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && !c.Status && c.DoctorId.Equals(docId)).ToList();
         }
 
         public IList<User> GetAllDoctorByTime(DateTime dateTime)
         {
-            return db.Consultings.Include(c => c.Doctor).Where(c => c.StartConsulting == dateTime && !c.Status).Select(c => c.Doctor).ToList();
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => c.StartConsulting == dateTime && !c.Status).Select(c => c.Doctor).ToList();
         }
 
         public void SaveBook(Consulting consulting, string patientId)
@@ -84,22 +89,26 @@ namespace OMW_Project.Repositories
 
         public IList<Consulting> GetHistoryByPatient(string patientId)
         {
-            return db.Consultings.Include(c=>c.Doctor).Include(m => m.Patient).Where(c => c.PatientId.Equals(patientId)).OrderBy(c=>c.StartConsulting).ToList();
+            return db.Consultings.Include(c=>c.Doctor).Include(m => m.Patient).Where(c => c.PatientId.Equals(patientId) && c.StartConsulting<DateTime.Now).OrderBy(c=>c.StartConsulting).ToList();
+        }
+        public IList<Consulting> GetHistoryByPatientPresent(string patientId)
+        {
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => c.PatientId.Equals(patientId) && c.StartConsulting > DateTime.Now).OrderBy(c => c.StartConsulting).ToList();
         }
 
         public IList<Consulting> GetAllAvalable()
         {
-            return db.Consultings.Include(c => c.Doctor).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && !c.Status).ToList();
+            return db.Consultings.Include(c => c.Doctor).Include(m => m.Patient).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && !c.Status).ToList();
         }
 
         public IList<Consulting> GetAvailableByDoctorId(string doctorId)
         {
-            return db.Consultings.Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && c.DoctorId.Equals(doctorId)).ToList();
+            return db.Consultings.Include(c => c.Patient).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) < 0 && c.DoctorId.Equals(doctorId)).ToList();
         }
 
         public IList<Consulting> GetAllMetByDoctorIdResult(string docId)
         {
-            return db.Consultings.Include(c=>c.Patient).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) >= 0 && c.DoctorId.Equals(docId) && c.Status && !db.ConsultResults.Any(r=>r.ConsultingId.Equals(c.ConsultingId))).ToList();
+            return db.Consultings.Include(c=>c.Patient).Where(c => DbFunctions.DiffDays(c.StartConsulting, DateTime.Now) >= 0 && c.DoctorId.Equals(docId) && c.Status && !c.HasResult).ToList();
         }
 
         public IList<Consulting> GetAllMetByDoctorIdHistory(string docId)

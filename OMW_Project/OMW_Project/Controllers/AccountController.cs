@@ -94,7 +94,7 @@ namespace OMW_Project.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Đăng nhập thất bại");
                     ViewBag.lstCatePost = _postRepository.GetPost_Category();
                     return View(model);
             }
@@ -231,7 +231,7 @@ namespace OMW_Project.Controllers
                     result = await UserManager.AddToRolesAsync(user.Id, "User");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Bạn đăng ký tài khoản thành công. Nếu bạn muốn đăng nhập, hãy bấm vào link bên cạnh: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }

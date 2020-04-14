@@ -17,8 +17,10 @@ namespace OMW_Project.Repositories
         IList<Consulting> GetAll();
         IList<Consulting> GetAllAvalable();
         IList<Consulting> GetAllMet();
+        Consulting CheckUserId(string userId);
         IList<Consulting> GetAllMetByDoctorIdResult(string docId);
         IList<Consulting> GetAllMetByDoctorIdHistory(string docId);
+        IList<Consulting> GetHistoryByPatientPresent(string patientId);
         IList<Consulting> GetAllNotMet();
         IList<Consulting> GetAllForBook(string docId);
         IList<User> GetAllDoctorByTime(DateTime dateTime);

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OMW_Project.Areas.Identity.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,WebManager")]
 
     public class ProductsAdminController : Controller
     {

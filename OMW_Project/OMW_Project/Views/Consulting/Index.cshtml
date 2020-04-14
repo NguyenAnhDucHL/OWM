@@ -1,0 +1,22 @@
+﻿@model Consulting
+@section NavBar{
+    <nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded">
+        <div style="width:100%">
+            <div class="col">
+                @Html.Partial("_PartialLoginButton")
+            </div>
+        </div>
+    </nav>
+}
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mx-auto">
+                <div class="cta-inner rounded">
+                    <h4>Bạn hiện đang có lịch tư vấn vào ngày @Model.StartConsulting.ToString("dd/MM/yyyy HH:mm"). Bạn phải đợi lượt tư vấn hiện tại xong mới được đặt lịch tư vấn mới  </h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -72,10 +72,12 @@
 				<p>@item.Quantity</p>
 			</div>
 			<div class="col-md-2">
-				<p>@item.UnitCost</p>
+				<p>@String.Format("{0:0,0 ₫}", item.UnitCost)</p>
 			</div>
 			<div class="col-md-2 text-right">
-				<p>@item.TotalCost</p>
+				<p>
+					@String.Format("{0:0,0 ₫}", item.TotalCost)
+				</p>
 			</div>
 		</div>
 	}
@@ -85,7 +87,7 @@
 
 		</div>
 		<div class="col-md-6 text-right">
-			<label>Tổng tiền: <b>@Model.TotalCost</b></label>
+			<label>Tổng tiền: <b>@String.Format("{0:0,0 ₫}", Model.TotalCost)</b></label>
 		</div>
 	</div>
 	<a class="btn btn-default" href="@Url.Action("Index", "OrderAdmin")">Quay lại</a>

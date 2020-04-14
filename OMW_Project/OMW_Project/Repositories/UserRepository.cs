@@ -39,7 +39,7 @@ namespace OMW_Project.Repositories
 
         public IList<User> GetAll()
         {
-            return db.Users.ToList();
+            return db.Users.Include(u=>u.Roles).ToList();
         }
 
         public IList<User> GetAllDoctor()

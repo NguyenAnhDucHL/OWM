@@ -1,0 +1,75 @@
+﻿@model OMW_Project.Models.DoctorContribution
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Đơn Hàng</h2>
+
+<div class="container">
+	<hr />
+	<div class="row">
+		<div class="col-md-2"><b>Tên khách hàng</b></div>
+		<div class="col-md-10">@Model.Order.FullName</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"><b>Email</b></div>
+		<div class="col-md-10">@Model.Order.Email</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"><b>Số điện thoại</b></div>
+		<div class="col-md-10">@Model.Order.Mobile</div>
+	</div>
+
+	<hr />
+	<div class="row">
+		<div class="col-md-6">
+			<label><b>Tên mặt hàng</b> </label>
+		</div>
+		<div class="col-md-2">
+			<label><b>Số lượng</b> </label>
+		</div>
+		<div class="col-md-2">
+			<label><b>Đơn giá</b> </label>
+		</div>
+		<div class="col-md-2 text-right">
+			<label><b>Thành tiền</b></label>
+		</div>
+	</div>
+	@foreach (var item in @ViewBag.OrderProduct)
+	{
+		<div class="row">
+			<div class="col-md-6">
+				<p> @item.Product.ProductName</p>
+			</div>
+			<div class="col-md-2">
+				<p>@item.Quantity</p>
+			</div>
+			<div class="col-md-2">
+				<p>@String.Format("{0:0,0 ₫}", item.UnitCost)</p>
+			</div>
+			<div class="col-md-2 text-right">
+				<p>@String.Format("{0:0,0 ₫}", item.TotalCost)</p>
+			</div>
+		</div>
+	}
+	<div class="row">
+
+		<div class="col-md-6">
+
+		</div>
+		<div class="col-md-6 text-right">
+			<label>Tổng tiền: <b>@String.Format("{0:0,0 ₫}", Model.Order.TotalCost)</b></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"><b>Phần trăm hoa hồng</b></div>
+		<div class="col-md-10">@String.Format("{0:,0}", Model.CommissionRate) %</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"><b>Tiền hoa hồng</b></div>
+		<div class="col-md-10">@String.Format("{0:0,0 ₫}", Model.CommissionAmount)</div>
+	</div>
+	<hr/>
+	<a class="btn btn-default" href="@Url.Action("Index", "DoctorPayment")">Quay lại</a>
+</div>
