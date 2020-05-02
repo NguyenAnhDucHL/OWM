@@ -1,0 +1,29 @@
+﻿<Window x:Class="Filter_UID.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Filter_UID"
+        mc:Ignorable="d"
+        Title="Filter UID" Height="467" Width="758" Loaded="Window_Loaded">
+    <Grid Margin="0,0,101,0" Height="423">
+        <Label Content="Chọn file UID hôm trước" HorizontalAlignment="Left" Margin="48,30,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="UIDBefore" HorizontalAlignment="Left" Margin="250,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Height="26" MouseDoubleClick="UIDBefore_MouseDoubleClick"/>
+        <Label Content="Chọn file UID hôm sau" HorizontalAlignment="Left" Margin="48,95,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="UIDAfter" HorizontalAlignment="Left" Margin="250,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Height="26" MouseDoubleClick="UIDAfter_MouseDoubleClick"/>
+        <Label Content="Chọn file UID đối thủ" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="UIDOpponent" HorizontalAlignment="Left" Margin="250,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="356" Height="26" MouseDoubleClick="UIDOpponent_MouseDoubleClick"/>
+        <Label Content="Đặt tên file xuất ra" HorizontalAlignment="Left" Margin="64,313,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameFileExport" HorizontalAlignment="Left" Margin="266,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Height="26" RenderTransformOrigin="0.497,1.386"/>
+        <CheckBox x:Name="checkUID" Content="UID" HorizontalAlignment="Left" Margin="266,344,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.028,0.566"/>
+        <CheckBox x:Name="checkPhone" Content="Điện thoại" HorizontalAlignment="Left" Margin="428,344,0,0" VerticalAlignment="Top"/>
+        <Button Name="ExportFile" Content="Xuất File" HorizontalAlignment="Left" Margin="333,366,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.189,-0.674" Height="29" Width="76" Click="Button_Click" IsEnabled="False"/>
+        <Button Name="Comparefilebeforeafter" Content="Compare file hôm trước với file hôm sau" HorizontalAlignment="Left" Margin="333,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.013,-0.23" Height="30" Width="230" Click="Comparefilebeforeafter_Click" IsEnabled="False"/>
+        <Button Name="ComparewithOpponent" Content="Compare với file đối thủ" HorizontalAlignment="Left" Margin="333,234,0,0" VerticalAlignment="Top" Width="230" Height="28" Click="ComparewithOpponent_Click" IsEnabled="False"/>
+        <Label Content="Chọn fodler file xuất ra" HorizontalAlignment="Left" Margin="64,282,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameFileExportFolder" HorizontalAlignment="Left" Margin="266,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Height="26" RenderTransformOrigin="0.497,1.386"/>
+        <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="490,366,0,0" VerticalAlignment="Top" Height="29" Width="56" Click="ResetButton_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.exe
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.deps.json
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.runtimeconfig.json
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.runtimeconfig.dev.json
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.dll
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.pdb
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\bin\Release\netcoreapp3.1\CSVLib.dll
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\MainWindow.g.cs
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\App.g.cs
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID_MarkupCompile.cache
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID_MarkupCompile.lref
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\MainWindow.baml
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.g.resources
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfoInputs.cache
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfo.cs
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csproj.CopyComplete
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.dll
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.pdb
+C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache
