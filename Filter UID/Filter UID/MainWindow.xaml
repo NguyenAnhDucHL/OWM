@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Filter_UID"
         mc:Ignorable="d"
-        Title="Filter UID" Height="467" Width="758" Loaded="Window_Loaded">
+        Title="Filter UID" Height="467" Width="758" Loaded="Window_Loaded" Icon="icon.png">
     <Grid Margin="0,0,101,0" Height="423">
         <Label Content="Chọn file UID hôm trước" HorizontalAlignment="Left" Margin="48,30,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="UIDBefore" HorizontalAlignment="Left" Margin="250,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Height="26" MouseDoubleClick="UIDBefore_MouseDoubleClick"/>

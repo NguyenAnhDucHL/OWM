@@ -5,12 +5,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Filter_UID</RootNamespace>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icoim.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icon.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="CSVLib">
       <HintPath>..\..\..\..\Downloads\CSVLib.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon.png" />
   </ItemGroup>
 
 </Project>
