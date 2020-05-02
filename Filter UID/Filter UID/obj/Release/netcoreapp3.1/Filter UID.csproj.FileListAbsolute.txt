@@ -17,3 +17,22 @@ C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Fi
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.dll
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.pdb
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\MainWindow.g.cs
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\App.g.cs
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID_MarkupCompile.cache
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID_MarkupCompile.lref
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.dll
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.pdb
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.exe
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.deps.json
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.runtimeconfig.json
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.runtimeconfig.dev.json
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.dll
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\Filter UID.pdb
+E:\OWM_MVC5\Filter UID\Filter UID\bin\Release\netcoreapp3.1\CSVLib.dll
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\MainWindow.baml
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.g.resources
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfoInputs.cache
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfo.cs
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csproj.CopyComplete

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ANH DUC\\source\\repos\\Filter UID\\Filter UID\\Filter UID.csproj": {}
+    "E:\\OWM_MVC5\\Filter UID\\Filter UID\\Filter UID.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ANH DUC\\source\\repos\\Filter UID\\Filter UID\\Filter UID.csproj": {
+    "E:\\OWM_MVC5\\Filter UID\\Filter UID\\Filter UID.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ANH DUC\\source\\repos\\Filter UID\\Filter UID\\Filter UID.csproj",
+        "projectUniqueName": "E:\\OWM_MVC5\\Filter UID\\Filter UID\\Filter UID.csproj",
         "projectName": "Filter UID",
-        "projectPath": "C:\\Users\\ANH DUC\\source\\repos\\Filter UID\\Filter UID\\Filter UID.csproj",
+        "projectPath": "E:\\OWM_MVC5\\Filter UID\\Filter UID\\Filter UID.csproj",
         "packagesPath": "C:\\Users\\ANH DUC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ANH DUC\\source\\repos\\Filter UID\\Filter UID\\obj\\",
+        "outputPath": "E:\\OWM_MVC5\\Filter UID\\Filter UID\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
