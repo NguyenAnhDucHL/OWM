@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Filter_UID</RootNamespace>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>icoim.ico</ApplicationIcon>
+    <ApplicationIcon>icontool.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

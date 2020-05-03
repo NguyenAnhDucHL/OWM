@@ -17,7 +17,6 @@ C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Fi
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.dll
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.pdb
 C:\Users\ANH DUC\source\repos\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache
-E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\MainWindow.g.cs
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\App.g.cs
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID_MarkupCompile.cache

@@ -67,7 +67,8 @@ namespace Filter_UID
                 }
                 catch (Exception)
                 {
-                    MessageBoxResult result = MessageBox.Show("Bạn đang mở file excel. Bạn nên đóng file lại");
+                    UIDBefore.Text = "";
+                    MessageBoxResult result = MessageBox.Show("Lỗi. Bạn đang mở file hoặc file bạn đang bị lỗi. Làm ơn check lại !!!!");
                 }
             }
         }
@@ -83,6 +84,7 @@ namespace Filter_UID
                 {
                     using (CsvFileReader csvReader = new CsvFileReader(openFileDialog.FileName))
                     {
+                        NameFileExportFolder.Text = openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - openFileDialog.SafeFileName.Length - 1);
                         UIDAfter.Text = openFileDialog.FileName;
                         List<string> row = new List<string>();
                         List<string> dataid = new List<string>();
@@ -98,7 +100,9 @@ namespace Filter_UID
                 }
                 catch (Exception)
                 {
-                    MessageBoxResult result = MessageBox.Show("Bạn đang mở file excel. Bạn nên đóng file lại");
+                    NameFileExportFolder.Text = "";
+                    UIDAfter.Text = "";
+                    MessageBoxResult result = MessageBox.Show("Lỗi. Bạn đang mở file hoặc file bạn đang bị lỗi. Làm ơn check lại !!!!");
                 }
             }
 
@@ -118,18 +122,17 @@ namespace Filter_UID
                         UIDOpponent.Text = openFileDialog.FileName;
                         List<string> row = new List<string>();
                         List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataid.Add(row[0]);
                         }
                         dataIdOpponent = dataid.Distinct().ToList();
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBoxResult result = MessageBox.Show("Bạn đang mở file excel. Bạn nên đóng file lại");
+                    UIDOpponent.Text = "";
+                    MessageBoxResult result = MessageBox.Show("Lỗi. Bạn đang mở file hoặc file bạn đang bị lỗi. Làm ơn check lại !!!!");
                 }
 
             }
@@ -137,49 +140,102 @@ namespace Filter_UID
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DirectoryInfo openFileDialog = new DirectoryInfo(NameFileExportFolder.Text);
-            if (openFileDialog.Exists)
+            dataIdNoDuplicate = dataIdAfter.Except(dataIdBefore).ToList();
+            dataPhoneNoDuplicate = dataPhoneAfter.Except(dataPhoneBefore).ToList();
+            if (dataIdOpponent.Count() == 0)
             {
-                if (checkUID.IsChecked == true)
+                DirectoryInfo openFileDialog = new DirectoryInfo(NameFileExportFolder.Text);
+                if (openFileDialog.Exists)
                 {
-                    string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_UID" + ".txt";
-                    if (dataIdNoDuplicateFinal.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Id")
+                    if (checkUID.IsChecked == true)
                     {
-                        dataIdNoDuplicateFinal.RemoveAt(0);
-                    }
-                    using (StreamWriter sw = File.CreateText(path))
-                    {
-                        foreach (string item in dataIdNoDuplicateFinal)
+                        string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_UID" + ".txt";
+                        if (dataIdNoDuplicate.Count() > 0 && dataIdNoDuplicate.ElementAt(0).ToString() == "Id")
                         {
-                            sw.WriteLine(item);
+                            dataIdNoDuplicate.RemoveAt(0);
+                        }
+                        using (StreamWriter sw = File.CreateText(path))
+                        {
+                            foreach (string item in dataIdNoDuplicate)
+                            {
+                                sw.WriteLine(item);
+                            }
                         }
                     }
-                }
-                if (checkPhone.IsChecked == true)
-                {
-                    string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_Phone" + ".txt";
-                    if (dataPhoneNoDuplicate.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
+                    if (checkPhone.IsChecked == true)
                     {
-                        dataPhoneNoDuplicate.RemoveAt(0);
-                    }
-                    using (StreamWriter sw = File.CreateText(path))
-                    {
-                        foreach (string item in dataPhoneNoDuplicate)
+                        string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_Phone" + ".txt";
+                        if (dataPhoneNoDuplicate.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
                         {
-                            sw.WriteLine(item);
+                            dataPhoneNoDuplicate.RemoveAt(0);
+                        }
+                        using (StreamWriter sw = File.CreateText(path))
+                        {
+                            foreach (string item in dataPhoneNoDuplicate)
+                            {
+                                sw.WriteLine(item);
+                            }
                         }
                     }
+                    if (checkUID.IsChecked == false && checkPhone.IsChecked == false)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Chọn xuất ra file UID hoặc số điện thoại");
+                        return;
+                    }
+                    MessageBoxResult success = MessageBox.Show("Export success");
                 }
-                if (checkUID.IsChecked == false && checkPhone.IsChecked == false)
+                else
                 {
-                    MessageBoxResult result = MessageBox.Show("Chọn xuất ra file UID hoặc số điện thoại");
-                    return;
+                    MessageBoxResult result = MessageBox.Show("Folder không tồn tại");
                 }
-                MessageBoxResult success = MessageBox.Show("Export success");
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Folder không tồn tại");
+                dataIdNoDuplicateFinal = dataIdNoDuplicate.Except(dataIdOpponent).ToList();
+                DirectoryInfo openFileDialog = new DirectoryInfo(NameFileExportFolder.Text);
+                if (openFileDialog.Exists)
+                {
+                    if (checkUID.IsChecked == true)
+                    {
+                        string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_UID" + ".txt";
+                        if (dataIdNoDuplicateFinal.Count() > 0 && dataIdNoDuplicateFinal.ElementAt(0).ToString() == "Id")
+                        {
+                            dataIdNoDuplicateFinal.RemoveAt(0);
+                        }
+                        using (StreamWriter sw = File.CreateText(path))
+                        {
+                            foreach (string item in dataIdNoDuplicateFinal)
+                            {
+                                sw.WriteLine(item);
+                            }
+                        }
+                    }
+                    if (checkPhone.IsChecked == true)
+                    {
+                        string path = openFileDialog.FullName + "/" + NameFileExport.Text + "_Phone" + ".txt";
+                        if (dataPhoneNoDuplicate.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
+                        {
+                            dataPhoneNoDuplicate.RemoveAt(0);
+                        }
+                        using (StreamWriter sw = File.CreateText(path))
+                        {
+                            foreach (string item in dataPhoneNoDuplicate)
+                            {
+                                sw.WriteLine(item);
+                            }
+                        }
+                    }
+                    if (checkUID.IsChecked == false && checkPhone.IsChecked == false)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Chọn xuất ra file UID hoặc số điện thoại");
+                        return;
+                    }
+                    MessageBoxResult success = MessageBox.Show("Export success");
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Folder không tồn tại");
+                }
             }
 
         }
@@ -187,32 +243,8 @@ namespace Filter_UID
 
         private void Comparefilebeforeafter_Click(object sender, RoutedEventArgs e)
         {
-            List<string> dataID = new List<string>();
-            List<string> dataPhone = new List<string>();
-            foreach (string item in dataIdBefore)
-            {
-                dataID.Add(item);
-            }
-            foreach (string item in dataIdAfter)
-            {
-                dataID.Add(item);
-            }
-            dataIdNoDuplicate = dataID.Distinct().ToList();
-            foreach (string item in dataPhoneBefore)
-            {
-                dataPhone.Add(item);
-            }
-            foreach (string item in dataPhoneAfter)
-            {
-                dataPhone.Add(item);
-            }
-            dataPhoneNoDuplicate = dataPhone.Distinct().ToList();
-            MessageBoxResult result = MessageBox.Show("Compare success");
-        }
-
-        private void ComparewithOpponent_Click(object sender, RoutedEventArgs e)
-        {
-            dataIdNoDuplicateFinal = dataIdNoDuplicate.Except(dataIdOpponent).ToList();
+            dataIdNoDuplicate = dataIdAfter.Except(dataIdBefore).ToList();
+            dataPhoneNoDuplicate = dataPhoneAfter.Except(dataPhoneBefore).ToList();
             MessageBoxResult result = MessageBox.Show("Compare success");
         }
 
@@ -228,14 +260,9 @@ namespace Filter_UID
         {
             if (UIDBefore.Text != "" && UIDAfter.Text != "")
             {
-                Comparefilebeforeafter.IsEnabled = true;
-                if (UIDOpponent.Text != "")
+                if (UIDAfter.Text != "")
                 {
-                    ComparewithOpponent.IsEnabled = true;
-                    if (NameFileExport.Text != "")
-                    {
                         ExportFile.IsEnabled = true;
-                    }
                 }
             }
         }
@@ -247,16 +274,16 @@ namespace Filter_UID
             UIDOpponent.Text = "";
             NameFileExportFolder.Text = "";
             NameFileExport.Text = "";
-            checkUID.IsChecked = false;
+            checkUID.IsChecked = true;
             checkPhone.IsChecked = false;
-            dataIdBefore = null;
-            dataPhoneBefore = null;
-            dataIdAfter = null;
-            dataPhoneAfter = null;
-            dataIdNoDuplicate = null;
-            dataPhoneNoDuplicate = null;
-            dataIdOpponent = null;
-            dataIdNoDuplicateFinal = null;
+            dataIdBefore = new List<string>();
+            dataPhoneBefore = new List<string>();
+            dataIdAfter = new List<string>();
+            dataPhoneAfter = new List<string>();
+            dataIdNoDuplicate = new List<string>();
+            dataPhoneNoDuplicate = new List<string>();
+            dataIdOpponent = new List<string>();
+            dataIdNoDuplicateFinal = new List<string>();
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
