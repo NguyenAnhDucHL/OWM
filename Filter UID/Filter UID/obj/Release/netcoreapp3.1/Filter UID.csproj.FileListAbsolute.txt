@@ -35,3 +35,4 @@ E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.g.resourc
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfoInputs.cache
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.AssemblyInfo.cs
 E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csproj.CopyComplete
+E:\OWM_MVC5\Filter UID\Filter UID\obj\Release\netcoreapp3.1\Filter UID.csprojAssemblyReference.cache

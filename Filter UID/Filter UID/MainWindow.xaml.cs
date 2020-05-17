@@ -262,7 +262,7 @@ namespace Filter_UID
             {
                 if (UIDAfter.Text != "")
                 {
-                        ExportFile.IsEnabled = true;
+                    ExportFile.IsEnabled = true;
                 }
             }
         }
