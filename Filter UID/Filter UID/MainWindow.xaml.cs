@@ -54,15 +54,15 @@ namespace Filter_UID
                     {
                         UIDBefore.Text = openFileDialog.FileName;
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        dataIdBefore = dataid.Distinct().ToList();
-                        dataPhoneBefore = dataphone.Distinct().ToList();
+                        dataIdBefore = dataId.Distinct().ToList();
+                        dataPhoneBefore = dataPhone.Distinct().ToList();
                     }
                 }
                 catch (Exception)
@@ -87,15 +87,15 @@ namespace Filter_UID
                         NameFileExportFolder.Text = openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - openFileDialog.SafeFileName.Length - 1);
                         UIDAfter.Text = openFileDialog.FileName;
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        dataIdAfter = dataid.Distinct().ToList();
-                        dataPhoneAfter = dataphone.Distinct().ToList();
+                        dataIdAfter = dataId.Distinct().ToList();
+                        dataPhoneAfter = dataPhone.Distinct().ToList();
                     }
                 }
                 catch (Exception)
@@ -121,12 +121,12 @@ namespace Filter_UID
                     {
                         UIDOpponent.Text = openFileDialog.FileName;
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
+                        List<string> dataId = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[0]);
+                            dataId.Add(row[0]);
                         }
-                        dataIdOpponent = dataid.Distinct().ToList();
+                        dataIdOpponent = dataId.Distinct().ToList();
                     }
                 }
                 catch (Exception)
