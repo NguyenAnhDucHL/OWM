@@ -32,14 +32,14 @@ namespace Filter_UID
     }
     public partial class MainWindow : Window
     {
-        private List<DataInfo> DataListFolder = new List<DataInfo>();
-        private List<string> DataIdYesterday = new List<string>();
-        private List<string> DataPhoneYesterday = new List<string>();
-        private List<string> DataIdToday = new List<string>();
-        private List<string> DataPhoneToday = new List<string>();
-        private List<string> DataIdOpponent = new List<string>();
-        private List<string> DataIdNoDuplicate = new List<string>();
-        private List<string> DataPhoneNoDuplicate = new List<string>();
+        private List<DataInfo> dataListFolder = new List<DataInfo>();
+        private List<string> dataIdYesterday = new List<string>();
+        private List<string> dataPhoneYesterday = new List<string>();
+        private List<string> dataIdToday = new List<string>();
+        private List<string> dataPhoneToday = new List<string>();
+        private List<string> dataIdOpponent = new List<string>();
+        private List<string> dataIdNoDuplicate = new List<string>();
+        private List<string> dataPhoneNoDuplicate = new List<string>();
         private List<string> dataIdNoDuplicateFinal = new List<string>();
         public MainWindow()
         {
@@ -47,13 +47,13 @@ namespace Filter_UID
         }
         private void DeleteListData()
         {
-            DataListFolder.Clear();
+            dataListFolder.Clear();
         }
         private void ExportFile_Click(object sender, RoutedEventArgs e)
         {
             if (UIDCheck.IsChecked == true && PhoneCheck.IsChecked == true)
             {
-                foreach (DataInfo item in DataListFolder)
+                foreach (DataInfo item in dataListFolder)
                 {
                     string[] filePaths_HomeTruoc = Directory.GetFiles(item.Directory + "\\UID_Hom_Truoc", "*.csv",
                                          SearchOption.TopDirectoryOnly);
@@ -61,15 +61,15 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_HomeTruoc[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        DataIdYesterday = dataid.Distinct().ToList();
-                        DataPhoneYesterday = dataphone.Distinct().ToList();
+                        dataIdYesterday = dataId.Distinct().ToList();
+                        dataPhoneYesterday = dataPhone.Distinct().ToList();
                     }
                     string[] filePaths_HomeNay = Directory.GetFiles(item.Directory + "\\UID_Hom_Nay", "*.csv",
                                          SearchOption.TopDirectoryOnly);
@@ -77,15 +77,15 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_HomeNay[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        DataIdToday = dataid.Distinct().ToList();
-                        DataPhoneToday = dataphone.Distinct().ToList();
+                        dataIdToday = dataId.Distinct().ToList();
+                        dataPhoneToday = dataPhone.Distinct().ToList();
                     }
                     string[] filePaths_DoiThu = Directory.GetFiles(item.Directory + "\\UID_Doi_Thu", "*.csv",
                                         SearchOption.TopDirectoryOnly);
@@ -93,37 +93,37 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_DoiThu[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
+                        List<string> dataId = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[0]);
+                            dataId.Add(row[0]);
                         }
-                        DataIdOpponent = dataid.Distinct().ToList();
+                        dataIdOpponent = dataId.Distinct().ToList();
                     }
-                    DataIdNoDuplicate = DataIdToday.Except(DataIdYesterday).ToList();
-                    DataPhoneNoDuplicate = DataPhoneToday.Except(DataPhoneYesterday).ToList();
-                    if (DataIdOpponent.Count() == 0)
+                    dataIdNoDuplicate = dataIdToday.Except(dataIdYesterday).ToList();
+                    dataPhoneNoDuplicate = dataPhoneToday.Except(dataPhoneYesterday).ToList();
+                    if (dataIdOpponent.Count() == 0)
                     {
                         string path = item.Directory + "/Ket_Qua/" + item.NameFile + "_UID" + ".txt";
-                        if (DataIdNoDuplicate.Count() > 0 && DataIdNoDuplicate.ElementAt(0).ToString() == "Id")
+                        if (dataIdNoDuplicate.Count() > 0 && dataIdNoDuplicate.ElementAt(0).ToString() == "Id")
                         {
-                            DataIdNoDuplicate.RemoveAt(0);
+                            dataIdNoDuplicate.RemoveAt(0);
                         }
                         using (StreamWriter sw = File.CreateText(path))
                         {
-                            foreach (string item1 in DataIdNoDuplicate)
+                            foreach (string item1 in dataIdNoDuplicate)
                             {
                                 sw.WriteLine(item1);
                             }
                         }
                         string path2 = item.Directory + "/Ket_Qua/" + item.NameFile + "_Phone" + ".txt";
-                        if (DataPhoneNoDuplicate.Count() > 0 && DataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
+                        if (dataPhoneNoDuplicate.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
                         {
-                            DataPhoneNoDuplicate.RemoveAt(0);
+                            dataPhoneNoDuplicate.RemoveAt(0);
                         }
                         using (StreamWriter sw = File.CreateText(path2))
                         {
-                            foreach (string item2 in DataPhoneNoDuplicate)
+                            foreach (string item2 in dataPhoneNoDuplicate)
                             {
                                 sw.WriteLine(item2);
                             }
@@ -131,7 +131,7 @@ namespace Filter_UID
                     }
                     else
                     {
-                        dataIdNoDuplicateFinal = DataIdNoDuplicate.Except(DataIdOpponent).ToList();
+                        dataIdNoDuplicateFinal = dataIdNoDuplicate.Except(dataIdOpponent).ToList();
 
                         string path = item.Directory + "/Ket_Qua/" + item.NameFile + "_UID" + ".txt";
                         if (dataIdNoDuplicateFinal.Count() > 0 && dataIdNoDuplicateFinal.ElementAt(0).ToString() == "Id")
@@ -147,13 +147,13 @@ namespace Filter_UID
                         }
 
                         string path2 = item.Directory + "/Ket_Qua/" + item.NameFile + "_Phone" + ".txt";
-                        if (DataPhoneNoDuplicate.Count() > 0 && DataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
+                        if (dataPhoneNoDuplicate.Count() > 0 && dataPhoneNoDuplicate.ElementAt(0).ToString() == "Điện thoại")
                         {
-                            DataPhoneNoDuplicate.RemoveAt(0);
+                            dataPhoneNoDuplicate.RemoveAt(0);
                         }
                         using (StreamWriter sw = File.CreateText(path2))
                         {
-                            foreach (string item2 in DataPhoneNoDuplicate)
+                            foreach (string item2 in dataPhoneNoDuplicate)
                             {
                                 sw.WriteLine(item2);
                             }
@@ -165,7 +165,7 @@ namespace Filter_UID
             }
             else if (UIDCheck.IsChecked == true && PhoneCheck.IsChecked == false)
             {
-                foreach (var item in DataListFolder)
+                foreach (var item in dataListFolder)
                 {
                     string[] filePaths_HomeTruoc = Directory.GetFiles(item.Directory + "\\UID_Hom_Truoc", "*.csv",
                                       SearchOption.TopDirectoryOnly);
@@ -173,15 +173,15 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_HomeTruoc[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        DataIdYesterday = dataid.Distinct().ToList();
-                        DataPhoneYesterday = dataphone.Distinct().ToList();
+                        dataIdYesterday = dataId.Distinct().ToList();
+                        dataPhoneYesterday = dataPhone.Distinct().ToList();
                     }
                     string[] filePaths_HomeNay = Directory.GetFiles(item.Directory + "\\UID_Hom_Nay", "*.csv",
                                     SearchOption.TopDirectoryOnly);
@@ -189,15 +189,15 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_HomeNay[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
-                        List<string> dataphone = new List<string>();
+                        List<string> dataId = new List<string>();
+                        List<string> dataPhone = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[1]);
-                            dataphone.Add(row[4]);
+                            dataId.Add(row[1]);
+                            dataPhone.Add(row[4]);
                         }
-                        DataIdToday = dataid.Distinct().ToList();
-                        DataPhoneToday = dataphone.Distinct().ToList();
+                        dataIdToday = dataId.Distinct().ToList();
+                        dataPhoneToday = dataPhone.Distinct().ToList();
                     }
                     string[] filePaths_DoiThu = Directory.GetFiles(item.Directory + "\\UID_Doi_Thu", "*.csv",
                                     SearchOption.TopDirectoryOnly);
@@ -205,25 +205,25 @@ namespace Filter_UID
                     using (CsvFileReader csvReader = new CsvFileReader(filePaths_DoiThu[0]))
                     {
                         List<string> row = new List<string>();
-                        List<string> dataid = new List<string>();
+                        List<string> dataId = new List<string>();
                         while (csvReader.ReadRow(row))
                         {
-                            dataid.Add(row[0]);
+                            dataId.Add(row[0]);
                         }
-                        DataIdOpponent = dataid.Distinct().ToList();
+                        dataIdOpponent = dataId.Distinct().ToList();
                     }
-                    DataIdNoDuplicate = DataIdToday.Except(DataIdYesterday).ToList();
-                    DataPhoneNoDuplicate = DataPhoneToday.Except(DataPhoneYesterday).ToList();
-                    if (DataIdOpponent.Count() == 0)
+                    dataIdNoDuplicate = dataIdToday.Except(dataIdYesterday).ToList();
+                    dataPhoneNoDuplicate = dataPhoneToday.Except(dataPhoneYesterday).ToList();
+                    if (dataIdOpponent.Count() == 0)
                     {
                         string path = item.Directory + "/Ket_Qua/" + item.NameFile + "_UID" + ".txt";
-                        if (DataIdNoDuplicate.Count() > 0 && DataIdNoDuplicate.ElementAt(0).ToString() == "Id")
+                        if (dataIdNoDuplicate.Count() > 0 && dataIdNoDuplicate.ElementAt(0).ToString() == "Id")
                         {
-                            DataIdNoDuplicate.RemoveAt(0);
+                            dataIdNoDuplicate.RemoveAt(0);
                         }
                         using (StreamWriter sw = File.CreateText(path))
                         {
-                            foreach (string item1 in DataIdNoDuplicate)
+                            foreach (string item1 in dataIdNoDuplicate)
                             {
                                 sw.WriteLine(item1);
                             }
@@ -231,7 +231,7 @@ namespace Filter_UID
                     }
                     else
                     {
-                        dataIdNoDuplicateFinal = DataIdNoDuplicate.Except(DataIdOpponent).ToList();
+                        dataIdNoDuplicateFinal = dataIdNoDuplicate.Except(dataIdOpponent).ToList();
 
                         string path = item.Directory + "/Ket_Qua/" + item.NameFile + "_UID" + ".txt";
                         if (dataIdNoDuplicateFinal.Count() > 0 && dataIdNoDuplicateFinal.ElementAt(0).ToString() == "Id")
@@ -276,7 +276,7 @@ namespace Filter_UID
                             DataInfo dataInfo = new DataInfo();
                             dataInfo.Directory = row[0];
                             dataInfo.NameFile = row[1];
-                            DataListFolder.Add(dataInfo);
+                            dataListFolder.Add(dataInfo);
                         }
                     }
                 }
